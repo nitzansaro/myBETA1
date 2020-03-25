@@ -29,6 +29,7 @@ public class Main3Activity extends AppCompatActivity {
     public boolean onCreateOptionsMenu (Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+
     }
 
     public boolean onOptionsItemSelected (MenuItem item) {
