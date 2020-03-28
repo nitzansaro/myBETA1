@@ -38,6 +38,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:visibility="invisible"
+            android:text="coach"
 
             />
 
@@ -56,7 +58,10 @@
             android:id="@+id/tVnameview"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            />
+
+
 
         <Space
             android:layout_width="match_parent"
@@ -131,6 +136,52 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.5" />
+
+        <TextView
+            android:id="@+id/tVtnumview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:visibility="invisible"
+            android:text="team number" />
+
+        <TextView
+            android:id="@+id/tVtnumview1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5" />
+
+        <TextView
+
+            android:id="@+id/tVtnameview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:visibility="invisible"
+            android:text="team name" />
+
+
+        <TextView
+            android:id="@+id/tVtnameview1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5" />
+
+
+
+
+
+
 
         <CheckBox
             android:id="@+id/cBconnectview"

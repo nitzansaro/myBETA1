@@ -38,6 +38,36 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.5" />
+        <LinearLayout
+            android:layoutDirection="ltr"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+
+            android:orientation="horizontal">
+
+            <Switch
+                android:id="@+id/pOrc"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                style="@style/TextAppearance.AppCompat.Large"
+                android:text="player" />
+
+            <TextView
+                android:gravity="right|center_vertical"
+                style="@style/TextAppearance.AppCompat.Large"
+                android:id="@+id/tVcoach4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                android:text="coach" />
+        </LinearLayout>
+
+
+
 
 
 
@@ -117,39 +147,12 @@
             android:layout_height="0dp"
             android:layout_weight="0.5" />
 
-        <LinearLayout
-            android:layoutDirection="ltr"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-
-            android:orientation="horizontal">
-
-            <Switch
-                android:id="@+id/pOrc"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:visibility="invisible"
-                style="@style/TextAppearance.AppCompat.Large"
-                android:text="player" />
-
-            <TextView
-                android:gravity="right|center_vertical"
-                style="@style/TextAppearance.AppCompat.Large"
-                android:id="@+id/tVcoach4"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:visibility="invisible"
-                android:text="coach" />
-        </LinearLayout>
 
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5" />
+
+
+
+
 
         <CheckBox
             android:id="@+id/cBstayconnect"

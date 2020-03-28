@@ -1,28 +1,30 @@
 package com.example.mybeta1;
 
 class User {
-    private String name, email, phone, uid, id,coach2;
+    private String name, email, phone, uid, id,coach2,teamName,teamNum;
+    private Boolean coach=false;
 
 
     public User() {
     }
 
-    public User(String name, String email, String phone, String uid, String id, String coach2) {
+    public User(String name, String email, String phone, String uid, String id, Boolean coach) {
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.uid = uid;
-        this.coach2=coach2;
+        this.coach=coach;
         this.id=id;
 
+
     }
 
-    public String getCoach2() {
-        return coach2;
+    public Boolean getCoach() {
+        return coach;
     }
 
-    public void setCoach2(String coach2) {
-        this.coach2 = coach2;
+    public void setCoach(Boolean coach2) {
+        this.coach = coach;
     }
 
 
@@ -50,6 +52,9 @@ class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+
+
 
     public String getPhone() {
         return phone;

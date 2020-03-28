@@ -44,8 +44,23 @@
             android:onClick="toTeams"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:text="my team"
+            android:visibility="invisible"
+            android:text="Add team"
             android:layout_weight="0.4"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1" />
+
+        <Button
+            android:id="@+id/addteam"
+            android:onClick="toaddTeams"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="add team"
+            android:visibility="invisible"
+            android:layout_weight="0.3"/>
 
 
         <TextView

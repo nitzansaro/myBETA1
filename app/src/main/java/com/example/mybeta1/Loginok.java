@@ -27,16 +27,10 @@ import static com.example.mybeta1.FBref.refUsers;
 
 public class Loginok extends AppCompatActivity {
 
-    String name, email, uid , id, coach2;
+    String name, email, uid , id,cOp1;
     TextView tVnameview, tVemailview, tVuidview, tVidview,tVcoachview,tVphoneview;
     CheckBox cBconnectview;
-
-
-
-
-
-
-
+    Boolean coach2;
 
 
 
@@ -50,23 +44,21 @@ public class Loginok extends AppCompatActivity {
         tVidview = (TextView) findViewById(R.id.tVidview);
         tVphoneview = (TextView) findViewById(R.id.tVphoneview);
         tVcoachview = (TextView) findViewById(R.id.tVcoachview);
-
         cBconnectview = (CheckBox) findViewById(R.id.cBconnectview);
 
-
-
-
-
     }
-
 
 
     @Override
     public void onStart() {
         super.onStart();
-
+         //אחרי שיעבוד זה יצטרך לקבל מידע מהמניו, איך יגשים למה שמתחת למאמן/שחקן
+        Intent i=getIntent();
+        cOp1= i.getStringExtra("cOp");
         FirebaseUser user = refAuth.getCurrentUser();
+
         uid = user.getUid();
+
         Query query = refUsers
                 .orderByChild("uid")
                 .equalTo(uid)
@@ -86,27 +78,18 @@ public class Loginok extends AppCompatActivity {
 
                     for(DataSnapshot data : dataSnapshot.getChildren()){
                     User user = data.getValue(User.class);
+
+
                     tVnameview.setText(user.getName());
                     tVidview.setText(user.getid());
                     tVphoneview.setText(user.getPhone());
-                    tVcoachview.setText(user.getCoach2());
-                }
+                    coach2=user.getCoach();
 
-            }}
-
+                    if (coach2)
+                        tVcoachview.setVisibility(View.VISIBLE);
+                    } }}
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        };
-
-
-
-
-
-
-
-
+            public void onCancelled(@NonNull DatabaseError databaseError) { }};
 
     public void update(View view) {
         FirebaseUser user = refAuth.getCurrentUser();
@@ -143,12 +126,4 @@ public class Loginok extends AppCompatActivity {
 
         return true;
     }
-
-
-
-
-
-
-
-
 }

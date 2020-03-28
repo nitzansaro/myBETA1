@@ -26,8 +26,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import static com.example.mybeta1.FBref.refAuth;
+import static com.example.mybeta1.FBref.refTeam;
 import static com.example.mybeta1.FBref.refUsers;
 
 public class Main2Activity extends AppCompatActivity {
@@ -36,7 +40,7 @@ public class Main2Activity extends AppCompatActivity {
     CheckBox cBstayconnect;
     Button btn;
     Switch pOrc;
-    String coach2;
+    Boolean coach;
 
     String name, phone, email, password, uid,id;
     User userdb;
@@ -48,7 +52,6 @@ public class Main2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
         pOrc = findViewById(R.id.pOrc);
         tVcoach4=findViewById(R.id.tVcoach4);
-
         tVtitle=(TextView) findViewById(R.id.tVtitle);
         eTid=(EditText)findViewById(R.id.eTid);
         eTname=(EditText)findViewById(R.id.eTname);
@@ -57,11 +60,8 @@ public class Main2Activity extends AppCompatActivity {
         eTphone=(EditText)findViewById(R.id.eTphone);
         cBstayconnect=(CheckBox)findViewById(R.id.cBstayconnect);
 
-
-
         tVregister=(TextView) findViewById(R.id.tVregister);
         btn=(Button)findViewById(R.id.btn);
-
 
         stayConnect=false;
         registered=true;
@@ -78,8 +78,6 @@ public class Main2Activity extends AppCompatActivity {
             eTid.setVisibility(View.VISIBLE);
             pOrc.setVisibility(View.VISIBLE);
             tVcoach4.setVisibility(View.VISIBLE);
-
-
             btn.setText("Register");
             registered=false;
             logoption();
@@ -92,7 +90,9 @@ public class Main2Activity extends AppCompatActivity {
         super.onStart();
         SharedPreferences settings=getSharedPreferences("PREFS_NAME",MODE_PRIVATE);
         Boolean isChecked=settings.getBoolean("stayConnect",false);
-        Intent si = new Intent(Main2Activity.this,Loginok.class);
+        Intent si = new Intent(Main2Activity.this,Main3Activity.class);
+        si.putExtra("cOp",coach);
+        si.putExtra("name",name);
         if (refAuth.getCurrentUser()!=null && isChecked) {
             stayConnect=true;
             startActivity(si);
@@ -161,24 +161,27 @@ public class Main2Activity extends AppCompatActivity {
      * <p>
      */
     public void logorreg(View view) {
-        email=eTemail.getText().toString();
-        password=eTpass.getText().toString();
+        email = eTemail.getText().toString();
+        password = eTpass.getText().toString();
         if (registered) {
-            final ProgressDialog pd=ProgressDialog.show(this,"Login","Connecting...",true);
+            final ProgressDialog pd = ProgressDialog.show(this, "Login", "Connecting...", true);
             refAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             pd.dismiss();
                             if (task.isSuccessful()) {
-                                SharedPreferences settings=getSharedPreferences("PREFS_NAME",MODE_PRIVATE);
-                                SharedPreferences.Editor editor=settings.edit();
-                                editor.putBoolean("stayConnect",cBstayconnect.isChecked());
+                                SharedPreferences settings = getSharedPreferences("PREFS_NAME", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = settings.edit();
+                                editor.putBoolean("stayConnect", cBstayconnect.isChecked());
                                 editor.apply(); //changed from commit
                                 Log.d("Main2Activity", "signinUserWithEmail:success");
                                 Toast.makeText(Main2Activity.this, "Login Success", Toast.LENGTH_LONG).show();
-                                Intent si = new Intent(Main2Activity.this,Loginok.class);
+                                Intent si = new Intent(Main2Activity.this, Main3Activity.class);
+                                si.putExtra("cOp",coach);
+                                si.putExtra("name",name);
                                 startActivity(si);
+
                             } else {
                                 Log.d("Main2Activity", "signinUserWithEmail:fail");
                                 Toast.makeText(Main2Activity.this, "e-mail or password are wrong!", Toast.LENGTH_LONG).show();
@@ -186,49 +189,64 @@ public class Main2Activity extends AppCompatActivity {
                         }
                     });
         } else {
-            name=eTname.getText().toString();
-            phone=eTphone.getText().toString();
-            id=eTid.getText().toString();
-            Coach1=pOrc.isChecked();
-            if (Coach1)
-                coach2="coach";
-            else coach2="player";
+            name = eTname.getText().toString();
+            phone = eTphone.getText().toString();
+            id = eTid.getText().toString();
+            if (pOrc.isChecked())
+                coach = true;
+            else {
+                coach= false;
+
+            }
+            ;
 
 
-
-
-
-            final ProgressDialog pd=ProgressDialog.show(this,"Register","Registering...",true);
+            final ProgressDialog pd = ProgressDialog.show(this, "Register", "Registering...", true);
             refAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             pd.dismiss();
                             if (task.isSuccessful()) {
-                                SharedPreferences settings=getSharedPreferences("PREFS_NAME",MODE_PRIVATE);
-                                SharedPreferences.Editor editor=settings.edit();
-                                editor.putBoolean("stayConnect",cBstayconnect.isChecked());
-                                editor.putBoolean("firstRun",false);
+                                SharedPreferences settings = getSharedPreferences("PREFS_NAME", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = settings.edit();
+                                editor.putBoolean("stayConnect", cBstayconnect.isChecked());
+                                editor.putBoolean("firstRun", false);
                                 editor.commit();
                                 Log.d("Main2Activity", "createUserWithEmail:success");
                                 FirebaseUser user = refAuth.getCurrentUser();
                                 uid = user.getUid();
-                                userdb=new User(name,email,phone,uid,id,coach2);
-                                refUsers.child(name).setValue(userdb);
-                                Toast.makeText(Main2Activity.this, "Successful registration", Toast.LENGTH_LONG).show();
-                                Intent si = new Intent(Main2Activity.this,Loginok.class);
-                                startActivity(si);
+                                userdb = new User(name, email, phone, uid, id,coach);
+
+
+                                if (coach) {
+                                    refUsers.child("Coach").child(name).setValue(userdb);
+                                    Toast.makeText(Main2Activity.this, "Successful registration", Toast.LENGTH_LONG).show();
+
+                                    Intent si = new Intent(Main2Activity.this, addTeam.class);
+
+                                    si.putExtra("name",name);
+                                    startActivity(si);
+                                } else {
+                                    refUsers.child("Player").child(name).setValue(userdb);
+                                    Toast.makeText(Main2Activity.this, "Successful registration", Toast.LENGTH_LONG).show();
+                                    Intent si = new Intent(Main2Activity.this, playeraddt.class);
+
+                                    si.putExtra("name",name);
+                                    startActivity(si);
+
+                                }
                             } else {
                                 if (task.getException() instanceof FirebaseAuthUserCollisionException)
                                     Toast.makeText(Main2Activity.this, "User with e-mail already exist!", Toast.LENGTH_LONG).show();
                                 else {
                                     Log.w("Main2Activity", "createUserWithEmail:failure", task.getException());
-                                    Toast.makeText(Main2Activity.this, "User create failed.",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(Main2Activity.this, "User create failed.", Toast.LENGTH_LONG).show();
                                 }
                             }
                         }
                     });
         }
-    }
+    }}
 
-}
+

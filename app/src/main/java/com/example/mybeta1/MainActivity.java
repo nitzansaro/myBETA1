@@ -7,11 +7,16 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Switch;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    Switch pOrc;
+     EditText eTteamNum, eTteamName;
+     String coach2,teamName,teamNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
     }
+
 
 
 
