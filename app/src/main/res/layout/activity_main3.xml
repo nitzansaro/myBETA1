@@ -44,8 +44,8 @@
             android:onClick="toTeams"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:visibility="invisible"
-            android:text="Add team"
+            android:visibility="visible"
+            android:text="My teams"
             android:layout_weight="0.4"/>
 
         <Space
@@ -66,9 +66,10 @@
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.5"
+                android:layout_weight="0.1"
                 android:gravity="center"
                 android:text="my messeges:"
+            android:visibility="invisible"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -82,9 +83,9 @@
             android:id="@+id/lVmesseges"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.1"
             android:text="messege"
-            android:visibility="visible" />
+            android:visibility="invisible" />
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -94,7 +95,8 @@
             android:onClick="toMesseges"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.3"
+            android:layout_weight="0.1"
+            android:visibility="invisible"
             android:text="to messeges"/>
 
         <Space
@@ -132,11 +134,12 @@
             android:layout_weight="0.1" />
 
         <Button
-            android:onClick="toGames"
+            android:onClick="toaddGAME"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.3"
-            android:text="to games"/>
+            android:visibility="invisible"
+            android:text="add game"/>
 
         <Space
             android:layout_width="match_parent"

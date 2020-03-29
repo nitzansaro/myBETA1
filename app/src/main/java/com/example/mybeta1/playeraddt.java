@@ -29,7 +29,7 @@ public class playeraddt extends AppCompatActivity {
 
     String coach2;
 
-    ArrayList Playerslist  = new ArrayList <User> ();
+    ArrayList<String> playerslist  = new ArrayList <> ();
 
 
 
@@ -40,29 +40,35 @@ public class playeraddt extends AppCompatActivity {
         setContentView(R.layout.activity_playeraddt);
         nameText = findViewById(R.id.nameText);
         numText = findViewById(R.id.numText);
+        //ArrayList<String> Playerslist  = new ArrayList <> ();
 
-
-    }
-
-
-    public void submit(View view) {
-        name1 = nameText.getText().toString();
-        num1 = numText.getText().toString();
-
-        Query query = refTeam.orderByChild("name1").equalTo(name1).limitToFirst(1);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        refTeam.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                playerslist.clear();
+
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot data : dataSnapshot.getChildren()) {
 
 
-                        if (dataSnapshot.child("" + name1).getValue() != null) {
+                        if (data.getValue(Team.class) != null) {
                             Intent i = getIntent();
-                            Nplayer = i.getStringExtra("name");
-                            Playerslist.add(Nplayer);
+                            Nplayer=i.getStringExtra("name");
                             Team t = data.getValue(Team.class);
-                            t.setPlayerslist(Playerslist);
+                            if (t.getPlayerslist()!=null)
+
+
+                            if (name1.equals(t.getTname())){
+                                playerslist=(t.getPlayerslist());
+                                playerslist.add(Nplayer);
+                                String teamNAME=t.getTname();
+                                String teamNUM=t.getTnum();
+                                String coachNAME=t.getCoachname();
+                                Team t1=new Team(teamNUM,teamNAME,t.getCoachname(),playerslist);
+                                refTeam.child(name1).setValue(t1);
+                            }
+
+
 
                             Toast.makeText(playeraddt.this, "Team  added!", Toast.LENGTH_LONG).show();
                             Intent si = new Intent(playeraddt.this, Loginok.class);
@@ -70,9 +76,50 @@ public class playeraddt extends AppCompatActivity {
                             startActivity(si);
                         }
 
-                 else {
-                    Toast.makeText(playeraddt.this, "Team Doesn't exists, ask your coach", Toast.LENGTH_LONG).show();
-                }
+                        else {
+                            Toast.makeText(playeraddt.this, "Team Doesn't exists, ask your coach", Toast.LENGTH_LONG).show();
+                        }
+                    }}}
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });}
+
+
+
+
+    public void submit(View view) {
+        name1 = nameText.getText().toString();
+        num1 = numText.getText().toString();
+
+        //Query query = refTeam.orderByChild("name1").equalTo(name1).limitToFirst(1);
+        //query.
+        refTeam.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot data : dataSnapshot.getChildren()) {
+
+
+                        if (data.getValue(Team.class) != null) {
+                            Intent i = getIntent();
+                            Team t = data.getValue(Team.class);
+
+                            if (name1.equals(t.getTname()))
+                                playerslist.add(t.getTname());
+
+                            Toast.makeText(playeraddt.this, "Team  added!", Toast.LENGTH_LONG).show();
+                            Intent si = new Intent(playeraddt.this, Loginok.class);
+                            si.putExtra("cOp", "player");
+                            startActivity(si);
+                        }
+
+                        else {
+                            Toast.makeText(playeraddt.this, "Team Doesn't exists, ask your coach", Toast.LENGTH_LONG).show();
+                        }
             }}}
 
             @Override

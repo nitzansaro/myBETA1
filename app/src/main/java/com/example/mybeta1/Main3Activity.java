@@ -80,8 +80,7 @@ public class Main3Activity extends AppCompatActivity {
 
     }
 
-    public void toGames(View view) {
-    }
+
 
     public void toMesseges(View view) {
     }
@@ -116,4 +115,8 @@ public class Main3Activity extends AppCompatActivity {
     }
 
 
+    public void toaddGAME(View view) {
+        Intent si = new Intent(Main3Activity.this,gameInfo.class);
+        startActivity(si);
+    }
 }

@@ -32,7 +32,7 @@ public class addTeam extends AppCompatActivity {
     EditText nameText, numText;
 
 
-    String Tname,Tnum,Ncoach;
+    String Tname5,Tnum5,Ncoach;
     ArrayList Playerslist=new ArrayList();
    
 
@@ -54,20 +54,20 @@ public class addTeam extends AppCompatActivity {
     public void submit(View view) {
         Playerslist.clear();
 
-        Tname = nameText.getText().toString();
-        Tnum = numText.getText().toString();
+        Tname5 = nameText.getText().toString();
+        Tnum5 = numText.getText().toString();
 
 
         refTeam.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child("" + Tnum).getValue() == null)
+                if (dataSnapshot.child("" + Tnum5).getValue() == null)
                 {
                     Intent i=getIntent();
                     Ncoach=i.getStringExtra("name");
-                    Team t = new Team(Tnum, Tname,Ncoach,Playerslist);
-                    refTeam.child("" + Tname).setValue(t);
+                    Team t = new Team(Tnum5, Tname5,Ncoach,Playerslist);
+                    refTeam.child("" + Tname5).setValue(t);
                     finish();
                     Toast.makeText(addTeam.this, "Team added successfully", Toast.LENGTH_LONG).show();
                     Intent si = new Intent(addTeam.this,Main3Activity.class);
