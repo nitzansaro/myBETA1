@@ -33,7 +33,7 @@ import java.util.List;
 
 import static com.example.mybeta1.FBref.refAuth;
 import static com.example.mybeta1.FBref.refGame;
-import static com.example.mybeta1.FBref.refTeam;
+import static com.example.mybeta1.FBref.refTeams;
 import static com.example.mybeta1.FBref.refUsers;
 
 public class gameInfo extends AppCompatActivity {
@@ -84,14 +84,14 @@ public class gameInfo extends AppCompatActivity {
 
         //Toast.makeText(Physiolists.this, , Toast.LENGTH_LONG).show();
 
-        refTeam.addListenerForSingleValueEvent(new ValueEventListener() {
+        refTeams.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 teamList.clear();
                 for(DataSnapshot data : dataSnapshot.getChildren()){
                     Team t = data.getValue(Team.class);
                     if (cname.equals(t.getCoachname()))
-                        teamList.add(t.getTname());
+                        teamList.add(t.getTeamname());
                 }
                 ArrayAdapter adp = new ArrayAdapter<String>(gameInfo.this,R.layout.support_simple_spinner_dropdown_item, teamList);
                 teamName.setAdapter(adp);

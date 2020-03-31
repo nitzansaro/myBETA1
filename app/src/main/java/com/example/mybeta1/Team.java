@@ -3,58 +3,50 @@ package com.example.mybeta1;
 import java.util.ArrayList;
 
 public class Team {
-
-              public  ArrayList<String> Playerslist  = new ArrayList  ();
-
-        public String Tnum;
-        public String Tname;
-
-         public String coachname;
+    public String teamnum;
+    public String teamname;
+    public String coachname;
+    public  ArrayList<String> Plist  = new ArrayList  ();
 
 
-        public Team(){}
-
-        public Team(String Tnum, String Tname,String coachname, ArrayList<String> Playerslist ) {
-                this.Tnum = Tnum;
-            this.Tname = Tname;
-            this.Playerslist=Playerslist;
-
-            this.coachname=coachname;
-        }
-
-    public ArrayList<String> getPlayerslist() {
-        return Playerslist;
+    public Team(){}
+    public Team(String teamnum, String teamname, String coachname, ArrayList<String> Plist ) {
+        this.teamnum = teamnum;
+        this.teamname = teamname;
+        this.coachname = coachname;
+        this.Plist = Plist;
     }
 
-    public void setPlayerslist(ArrayList<String  > Playerslist) {
-        this.Playerslist = Playerslist;
+    public void setTeamnum(String teamnum) {
+        this.teamnum = teamnum;
+    }
+
+    public String getTeamnum() {
+        return teamnum;
+    }
+
+    public void setTeamname(String teamname) {
+        this.teamname = teamname;
+    }
+
+    public String getTeamname() {
+        return teamname;
+    }
+
+    public void setCoachname(String coachname) {
+        this.coachname = coachname;
     }
 
     public String getCoachname() {
         return coachname;
     }
 
-    public void setCoachname(String coachname) {
-        this.coachname = coachname;
-    }
-    public String getTname() {
-        return Tname;
+    public void setPlayerslist(ArrayList<String  > Plist) {
+        this.Plist = Plist;
     }
 
-    public void setTname(String Tname) {
-        this.Tname = Tname;
+    public ArrayList<String> getPlayerslist() {
+        return Plist;
     }
-
-    public String getTnum() {
-        return Tnum;
-    }
-
-    public void setTnum(String Tnum) {
-        this.Tnum = Tnum;
-    }
-
-
-
-
 
 }

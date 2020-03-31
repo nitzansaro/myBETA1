@@ -38,15 +38,15 @@ public class Main3Activity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        FirebaseUser user = refAuth.getCurrentUser();
-        uid = user.getUid();
-        Query query = refUsers
-                .orderByChild("uid")
-                .equalTo(uid)
+   /*     FirebaseUser user = refAuth.getCurrentUser();
+       uid = user.getUid();
+       Query query = refUsers
+                  .orderByChild("uid")
+               .equalTo(uid)
                 .limitToFirst(1);
 
 
-        query.addListenerForSingleValueEvent(VEL);
+       query.addListenerForSingleValueEvent(VEL);
         uid = user.getUid();}
         com.google.firebase.database.ValueEventListener VEL = new ValueEventListener() {
         @Override
@@ -118,5 +118,13 @@ public class Main3Activity extends AppCompatActivity {
     public void toaddGAME(View view) {
         Intent si = new Intent(Main3Activity.this,gameInfo.class);
         startActivity(si);
+    }
+}
+*/}
+
+    public void toaddTeams(View view) {
+        Intent si = new Intent(Main3Activity.this,addTeam.class);
+        startActivity(si);
+
     }
 }

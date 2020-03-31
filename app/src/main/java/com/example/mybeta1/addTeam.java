@@ -21,19 +21,16 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import static com.example.mybeta1.FBref.refAuth;
+import static com.example.mybeta1.FBref.refTeams;
 import static com.example.mybeta1.FBref.refUsers;
-
-import static com.example.mybeta1.FBref.refTeam;
-
-
 
 
 public class addTeam extends AppCompatActivity {
+
     EditText nameText, numText;
-
-
-    String Tname5,Tnum5,Ncoach;
-    ArrayList Playerslist=new ArrayList();
+    Boolean teamEX;
+    String tname,tnum,Ncoach;
+    ArrayList <String> playlist=new ArrayList();
    
 
     @Override
@@ -43,48 +40,46 @@ public class addTeam extends AppCompatActivity {
 
         nameText = findViewById(R.id.nameText);
         numText = findViewById(R.id.numText);
-
+        teamEX=false;
+        Intent i=getIntent();
+        Ncoach=i.getStringExtra("name");
     }
 
+    com.google.firebase.database.ValueEventListener VEL = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            teamEX=false;
+            if (dataSnapshot.exists()){
+                teamEX=true; }
+/*                for(DataSnapshot data : dataSnapshot.getChildren()){
+                       teamEX=true; }
+            }*/
+        }
 
-
-
-
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) { }
+    };
 
     public void submit(View view) {
-        Playerslist.clear();
+        playlist.clear();
+        tname = nameText.getText().toString();
+        tnum = numText.getText().toString();
+        Query query = refTeams
+                .orderByChild("teamname")
+                .equalTo(tname)
+                .limitToFirst(1);
+        query.addListenerForSingleValueEvent(VEL);
 
-        Tname5 = nameText.getText().toString();
-        Tnum5 = numText.getText().toString();
-
-
-        refTeam.addListenerForSingleValueEvent(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child("" + Tnum5).getValue() == null)
-                {
-                    Intent i=getIntent();
-                    Ncoach=i.getStringExtra("name");
-                    Team t = new Team(Tnum5, Tname5,Ncoach,Playerslist);
-                    refTeam.child("" + Tname5).setValue(t);
-                    finish();
-                    Toast.makeText(addTeam.this, "Team added successfully", Toast.LENGTH_LONG).show();
-                    Intent si = new Intent(addTeam.this,Main3Activity.class);
-                    si.putExtra("cOp", "coach");
-                    startActivity(si);
-                }
-                else
-                    Toast.makeText(addTeam.this, "Team already exists", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-    }
+        if (!teamEX) {
+            playlist.add(Ncoach);
+            Team t = new Team(tnum, tname, Ncoach, playlist);
+            refTeams.child(tname).setValue(t);
+            Toast.makeText(addTeam.this, "Team added successfully", Toast.LENGTH_LONG).show();
+            Intent si = new Intent(addTeam.this, Main3Activity.class);
+            si.putExtra("cOp", "coach");
+            startActivity(si); }
+        else
+            Toast.makeText(addTeam.this, "Team already exist", Toast.LENGTH_LONG).show(); }
 
 
 

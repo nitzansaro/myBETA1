@@ -31,7 +31,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import static com.example.mybeta1.FBref.refAuth;
-import static com.example.mybeta1.FBref.refTeam;
+import static com.example.mybeta1.FBref.refTeams;
 import static com.example.mybeta1.FBref.refUsers;
 
 public class Main2Activity extends AppCompatActivity {

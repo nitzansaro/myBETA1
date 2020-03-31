@@ -16,7 +16,7 @@ public class FBref {
 
     public static DatabaseReference RefMesseges= FBDB.getReference("message");
 
-    public static DatabaseReference refTeam=FBDB.getReference("Team");
+    public static DatabaseReference refTeams=FBDB.getReference("Teams");
     public static DatabaseReference refGame=FBDB.getReference("Game");
 
 }

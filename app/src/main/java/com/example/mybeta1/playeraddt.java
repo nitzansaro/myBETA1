@@ -19,17 +19,19 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import static com.example.mybeta1.FBref.refAuth;
-import static com.example.mybeta1.FBref.refTeam;
+import static com.example.mybeta1.FBref.refTeams;
 import static com.example.mybeta1.FBref.refUsers;
 
 
 public class playeraddt extends AppCompatActivity {
     EditText nameText, numText;
-    String name1, num1, uid,Nplayer;
+    String name1, num1,Nplayer;
 
-    String coach2;
 
-    ArrayList<String> playerslist  = new ArrayList <> ();
+    Boolean teamEX;
+    Team t;
+
+    ArrayList<String> playerslist1  = new ArrayList <> ();
 
 
 
@@ -39,111 +41,102 @@ public class playeraddt extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playeraddt);
         nameText = findViewById(R.id.nameText);
+        Intent i = getIntent();
+        Nplayer=i.getStringExtra("name");
         numText = findViewById(R.id.numText);
-        //ArrayList<String> Playerslist  = new ArrayList <> ();
-
-        refTeam.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                playerslist.clear();
-
-                if (dataSnapshot.exists()) {
-                    for (DataSnapshot data : dataSnapshot.getChildren()) {
-
-
-                        if (data.getValue(Team.class) != null) {
-                            Intent i = getIntent();
-                            Nplayer=i.getStringExtra("name");
-                            Team t = data.getValue(Team.class);
-                            if (t.getPlayerslist()!=null)
-
-
-                            if (name1.equals(t.getTname())){
-                                playerslist=(t.getPlayerslist());
-                                playerslist.add(Nplayer);
-                                String teamNAME=t.getTname();
-                                String teamNUM=t.getTnum();
-                                String coachNAME=t.getCoachname();
-                                Team t1=new Team(teamNUM,teamNAME,t.getCoachname(),playerslist);
-                                refTeam.child(name1).setValue(t1);
-                            }
 
 
 
-                            Toast.makeText(playeraddt.this, "Team  added!", Toast.LENGTH_LONG).show();
-                            Intent si = new Intent(playeraddt.this, Loginok.class);
-                            si.putExtra("cOp", "player");
-                            startActivity(si);
-                        }
+        }
 
-                        else {
-                            Toast.makeText(playeraddt.this, "Team Doesn't exists, ask your coach", Toast.LENGTH_LONG).show();
-                        }
-                    }}}
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+  /*  com.google.firebase.database.ValueEventListener VEL = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            teamEX=false;
+            if (dataSnapshot.exists()){
+              //  for(DataSnapshot data : dataSnapshot.getChildren()){
+                    //if (dataSnapshot.child("" + name1).getValue() != null)
+                teamEX=true;
+                 t = dataSnapshot.getValue(Team.class);
+                playerslist1=(t.getPlayerslist());
 
+                }}
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+        }
+    };
+
+
+
+       public void submit(View view) {
+        name1 = nameText.getText().toString();
+        num1 = numText.getText().toString();
+        playerslist1.clear();
+        Query query = refTeams
+                .orderByChild("teamname")
+                .equalTo(name1)
+                .limitToFirst(1);
+        query.addListenerForSingleValueEvent(VEL);
+
+        if (teamEX ) {
+            playerslist1.add(Nplayer);
+            t.setPlayerslist(playerslist1);
+            refTeams.child(name1).child("Plist").setValue(playerslist1);
             }
+            else{
+            Toast.makeText(playeraddt.this, "Team Doesn't exists, ask your coach", Toast.LENGTH_LONG).show();
 
-        });}
+
+        }
 
 
+
+        }}
+
+*/
 
 
     public void submit(View view) {
         name1 = nameText.getText().toString();
         num1 = numText.getText().toString();
 
-        //Query query = refTeam.orderByChild("name1").equalTo(name1).limitToFirst(1);
-        //query.
-        refTeam.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    for (DataSnapshot data : dataSnapshot.getChildren()) {
+        refTeams.addListenerForSingleValueEvent(new ValueEventListener() {
+        @Override
+        public void onDataChange (@NonNull DataSnapshot dataSnapshot){
+            playerslist1.clear();
 
 
-                        if (data.getValue(Team.class) != null) {
-                            Intent i = getIntent();
-                            Team t = data.getValue(Team.class);
+            if (dataSnapshot.exists()) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
 
-                            if (name1.equals(t.getTname()))
-                                playerslist.add(t.getTname());
+                    if (data.getValue(Team.class) != null) {
+                        Team t = data.getValue(Team.class);
+                        if (t.getPlayerslist() != null){
+                            if (name1.equals(t.getTeamname())) {
+                                playerslist1 = (t.getPlayerslist());
+                                playerslist1.add(Nplayer);
+                                t.setPlayerslist(playerslist1);
 
-                            Toast.makeText(playeraddt.this, "Team  added!", Toast.LENGTH_LONG).show();
-                            Intent si = new Intent(playeraddt.this, Loginok.class);
-                            si.putExtra("cOp", "player");
-                            startActivity(si);
-                        }
+                                //Team t1=new Team(t.getTnum(),t.getTname(),t.getCoachname(),Playerslist);
+                                refTeams.child(name1).child("Plist").setValue(playerslist1);
+                            }}
+                        Toast.makeText(playeraddt.this, "Team  added!", Toast.LENGTH_LONG).show();
+                        Intent si = new Intent(playeraddt.this, Loginok.class);
+                        si.putExtra("cOp", "player");
+                        startActivity(si);
+                    } else {
+                        Toast.makeText(playeraddt.this, "Team Doesn't exists, ask your coach", Toast.LENGTH_LONG).show();
 
-                        else {
-                            Toast.makeText(playeraddt.this, "Team Doesn't exists, ask your coach", Toast.LENGTH_LONG).show();
-                        }
-            }}}
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                }}
             }
+        }
 
-        });
-
-    }}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        @Override
+        public void onCancelled (@NonNull DatabaseError databaseError){
+        }});}}
 
 
 
