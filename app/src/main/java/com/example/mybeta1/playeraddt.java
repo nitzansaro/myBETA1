@@ -119,13 +119,12 @@ public class playeraddt extends AppCompatActivity {
                                 playerslist1 = (t.getPlayerslist());
                                 playerslist1.add(Nplayer);
                                 t.setPlayerslist(playerslist1);
-
-                                //Team t1=new Team(t.getTnum(),t.getTname(),t.getCoachname(),Playerslist);
                                 refTeams.child(name1).child("Plist").setValue(playerslist1);
                             }}
                         Toast.makeText(playeraddt.this, "Team  added!", Toast.LENGTH_LONG).show();
-                        Intent si = new Intent(playeraddt.this, Loginok.class);
-                        si.putExtra("cOp", "player");
+                        Intent si = new Intent(playeraddt.this, Main3Activity.class);
+                        si.putExtra("name", Nplayer);
+                        si.putExtra("teamNAME", name1);
                         startActivity(si);
                     } else {
                         Toast.makeText(playeraddt.this, "Team Doesn't exists, ask your coach", Toast.LENGTH_LONG).show();

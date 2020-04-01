@@ -75,8 +75,8 @@ public class addTeam extends AppCompatActivity {
             Team t = new Team(tnum, tname, Ncoach, playlist);
             refTeams.child(tname).setValue(t);
             Toast.makeText(addTeam.this, "Team added successfully", Toast.LENGTH_LONG).show();
-            Intent si = new Intent(addTeam.this, Main3Activity.class);
-            si.putExtra("cOp", "coach");
+            Intent si = new Intent(addTeam.this, Coachmain.class);
+            si.putExtra("name",Ncoach);
             startActivity(si); }
         else
             Toast.makeText(addTeam.this, "Team already exist", Toast.LENGTH_LONG).show(); }

@@ -28,8 +28,7 @@
             android:layout_height="0dp"
             android:layout_weight="1.5"
             android:gravity="center"
-            android:text="ez group: before we start
-                          are you a coach or a player"
+            android:text="ez group"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -37,22 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.7" />
-
-
-
-
-
-        <Button
-            android:id="@+id/button"
-            android:onClick="nextact"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="next" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.7" />
+     >
     </LinearLayout>
 
     <Space

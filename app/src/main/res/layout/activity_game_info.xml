@@ -8,6 +8,17 @@
     android:gravity="center"
     tools:context=".gameInfo">
 
+    <EditText
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:ems="10"
+
+        android:inputType="textPersonName"
+        android:hint="Date (dd/mm/yyyy)" />
+
+
 
 
 
@@ -18,7 +29,6 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:ems="10"
-        android:maxLength="3"
         android:inputType="textPersonName"
         android:hint="Place" />
 
@@ -37,6 +47,7 @@
         android:id="@+id/teamName2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:hint="opponent"
         android:layout_weight="1" />
 
     <Button

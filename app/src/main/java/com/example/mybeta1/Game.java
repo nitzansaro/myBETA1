@@ -3,17 +3,17 @@ package com.example.mybeta1;
 import java.sql.Time;
 
 public class Game {
-    public String teamName,teamName2,place,category, time;
+    public String teamName,teamName2,place,category, time, date;
 
 
     public Game(){}
-         public Game(String teamName, String teamName2,String place, String category ,String time) {
+         public Game(String teamName, String teamName2,String place, String category ,String time, String date) {
             this.teamName = teamName;
             this.teamName2= teamName2;
             this.category=category;
             this.place=place;
             this.time=time;
-
+            this.date=date;
     }
 
     public String getTeamName() {
@@ -65,6 +65,13 @@ public class Game {
         this.time = time;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate( String date) {
+        this.date = date;
+    }
 
 
 }

@@ -29,7 +29,7 @@
             android:layout_height="0dp"
             android:layout_weight="1.5"
             android:gravity="center"
-            android:text="Login data:"
+            android:id="@+id/titl"
             android:textSize="20sp"
             android:textStyle="bold" />
 

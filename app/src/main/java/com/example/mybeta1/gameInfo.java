@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,8 +40,9 @@ import static com.example.mybeta1.FBref.refUsers;
 public class gameInfo extends AppCompatActivity {
     Button time;
     Spinner teamName, category;
-    EditText place, teamName2;
-    String place1,teamname1,teamname2,category1;
+    EditText place, teamName2,date;
+    String p1,t1,t2,c1,d1;
+    String co;
 
 
     FirebaseAuth mAuth;
@@ -54,16 +56,17 @@ public class gameInfo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_info);
+
+        Intent i=getIntent();
+        co=i.getStringExtra("n");
         mAuth = FirebaseAuth.getInstance();
-
-
+        date=findViewById(R.id.date);
         place = findViewById(R.id.place);
         teamName = findViewById(R.id.teamName);
         teamName2 = findViewById(R.id.teamName2);
         time = findViewById(R.id.time);
         category  = findViewById(R.id.catagory);
 
-        //final List<String> pList = new ArrayList<>();
 
         refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -72,17 +75,12 @@ public class gameInfo extends AppCompatActivity {
                     User u = ds.getValue(User.class);
                     if (uid.equals(u.getUid()))
                         cname=u.getName();
-                }
-
-            }
-
+                } }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
-
-        //Toast.makeText(Physiolists.this, , Toast.LENGTH_LONG).show();
 
         refTeams.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -90,7 +88,7 @@ public class gameInfo extends AppCompatActivity {
                 teamList.clear();
                 for(DataSnapshot data : dataSnapshot.getChildren()){
                     Team t = data.getValue(Team.class);
-                    if (cname.equals(t.getCoachname()))
+                    if (co.equals(t.getCoachname()))
                         teamList.add(t.getTeamname());
                 }
                 ArrayAdapter adp = new ArrayAdapter<String>(gameInfo.this,R.layout.support_simple_spinner_dropdown_item, teamList);
@@ -114,11 +112,6 @@ public class gameInfo extends AppCompatActivity {
     }
 
 
-
-    //
-
-
-
     public void chooseTime(View view) {
         TimePickerDialog picker = new TimePickerDialog(gameInfo.this,android.R.style.Theme_Holo_Light_Dialog_NoActionBar,
                 new TimePickerDialog.OnTimeSetListener() {
@@ -135,16 +128,15 @@ public class gameInfo extends AppCompatActivity {
 
     public void next(View view) {
 
-        place1=place.getText().toString();
-        teamname2=teamName2.getText().toString();
-        teamname1=String.valueOf(teamName.getSelectedItem());
-        category1=String.valueOf(category.getSelectedItem());time.getText().toString();
+        p1=place.getText().toString();
+        t2=teamName2.getText().toString();
+        t1=String.valueOf(teamName.getSelectedItem());
+        c1=String.valueOf(category.getSelectedItem());time.getText().toString();
+        d1=date.getText().toString();;
 
-        Game game=new Game(teamname1,teamname2,place1,category1,time.getText().toString());
-        refGame.child(cname).setValue(game);
-
-
-
-
+        Game game=new Game(t1,t2,p1,c1,time.getText().toString(),d1);
+        refGame.child(d1).setValue(game);
+        Intent si = new Intent(gameInfo.this,Main3Activity.class);
+        startActivity(si);
     }
 }

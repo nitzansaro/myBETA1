@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".gameInfo"></activity>
+        <activity android:name=".listofteams"></activity>
+        <activity android:name=".Coachmain" />
+        <activity android:name=".Myteams" />
+        <activity android:name=".MyTeam" />
+        <activity android:name=".gameInfo" />
         <activity android:name=".playeraddt" />
         <activity android:name=".addTeam" />
         <activity android:name=".Main3Activity" />

@@ -90,10 +90,17 @@ public class Main2Activity extends AppCompatActivity {
         super.onStart();
         SharedPreferences settings=getSharedPreferences("PREFS_NAME",MODE_PRIVATE);
         Boolean isChecked=settings.getBoolean("stayConnect",false);
-        Intent si = new Intent(Main2Activity.this,Main3Activity.class);
-        si.putExtra("cOp",coach);
-        si.putExtra("name",name);
-        if (refAuth.getCurrentUser()!=null && isChecked) {
+        //isChecked=false;
+        Boolean c = settings.getBoolean("coach",false);
+        if (c && refAuth.getCurrentUser()!=null && isChecked){
+            Intent si = new Intent(Main2Activity.this, Coachmain.class);
+            si.putExtra("cOp",coach);
+            si.putExtra("name",name);
+            startActivity(si);
+        }
+
+        if (refAuth.getCurrentUser()!=null && isChecked && !c) {
+            Intent si = new Intent(Main2Activity.this, Main3Activity.class);
             stayConnect=true;
             startActivity(si);
         }
@@ -177,10 +184,18 @@ public class Main2Activity extends AppCompatActivity {
                                 editor.apply(); //changed from commit
                                 Log.d("Main2Activity", "signinUserWithEmail:success");
                                 Toast.makeText(Main2Activity.this, "Login Success", Toast.LENGTH_LONG).show();
-                                Intent si = new Intent(Main2Activity.this, Main3Activity.class);
-                                si.putExtra("cOp",coach);
+                                Boolean c = settings.getBoolean("coach",false);
+                                if (c){
+                                    Intent si = new Intent(Main2Activity.this, Coachmain.class);
+                                   // si.putExtra("cOp",coach);
+                                    si.putExtra("name",name);
+                                    startActivity(si);
+                                }
+                                else{
+                                    Intent si = new Intent(Main2Activity.this, Main3Activity.class);
+                                //si.putExtra("cOp",coach);
                                 si.putExtra("name",name);
-                                startActivity(si);
+                                startActivity(si);}
 
                             } else {
                                 Log.d("Main2Activity", "signinUserWithEmail:fail");
@@ -212,7 +227,8 @@ public class Main2Activity extends AppCompatActivity {
                                 SharedPreferences.Editor editor = settings.edit();
                                 editor.putBoolean("stayConnect", cBstayconnect.isChecked());
                                 editor.putBoolean("firstRun", false);
-                                editor.commit();
+                                editor.putBoolean("coach",pOrc.isChecked());
+                                editor.apply();
                                 Log.d("Main2Activity", "createUserWithEmail:success");
                                 FirebaseUser user = refAuth.getCurrentUser();
                                 uid = user.getUid();

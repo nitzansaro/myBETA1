@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.firebase.auth.FirebaseUser;
@@ -27,10 +28,18 @@ import static com.example.mybeta1.FBref.refUsers;
 
 public class Loginok extends AppCompatActivity {
 
-    String name, email, uid , id,cOp1;
-    TextView tVnameview, tVemailview, tVuidview, tVidview,tVcoachview,tVphoneview;
+    String name,   id,cOp1;
+    TextView tVnameview, tVemailview, tVuidview, tVidview,tVcoachview,tVphoneview,t;
     CheckBox cBconnectview;
     Boolean coach2;
+    FirebaseUser user = refAuth.getCurrentUser();
+    String uid = user.getUid();
+    String email=user.getEmail();
+    String a;
+    String b;
+    //boolean c;
+    String d;
+    String n,p,i,c;
 
 
 
@@ -45,20 +54,61 @@ public class Loginok extends AppCompatActivity {
         tVphoneview = (TextView) findViewById(R.id.tVphoneview);
         tVcoachview = (TextView) findViewById(R.id.tVcoachview);
         cBconnectview = (CheckBox) findViewById(R.id.cBconnectview);
+        t=findViewById(R.id.titl);
+        //tVnameview.setText("idan");
+        Intent ins=getIntent();
+        n=ins.getStringExtra("n");
+        p=ins.getStringExtra("p");
+        i=ins.getStringExtra("i");
+        c=ins.getStringExtra("cOp");
+
+
+        /*refUsers.child("Player").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    User u = ds.getValue(User.class);
+                    if (email.equals(u.getEmail())){
+                       a=u.getName();
+                        b=u.getid();
+                        //Toast.makeText(Loginok.this, u.getName(), Toast.LENGTH_LONG).show();
+                        c=u.getPhone();
+                        if (u.getCoach())
+                            t.setText("Coach information");
+                        if (!u.getCoach()) {
+                            t.setText("Player information");
+                    }}
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });*/
+       // tVphoneview.setText("numbers");
+        tVemailview.setText(email);
+        tVuidview.setText(uid);
+        tVnameview.setText(n);
+        tVidview.setText(i);
+        tVphoneview.setText(p);
+        t.setText(c + "information");
+        SharedPreferences settings=getSharedPreferences("PREFS_NAME",MODE_PRIVATE);
+        Boolean isChecked=settings.getBoolean("stayConnect",false);
+        cBconnectview.setChecked(isChecked);
 
     }
 
 
-    @Override
+    /*@Override
     public void onStart() {
         super.onStart();
          //אחרי שיעבוד זה יצטרך לקבל מידע מהמניו, איך יגשים למה שמתחת למאמן/שחקן
         Intent i=getIntent();
-        cOp1= i.getStringExtra("cOp");
+        //cOp1= i.getStringExtra("cOp");
         FirebaseUser user = refAuth.getCurrentUser();
-
         uid = user.getUid();
-
         Query query = refUsers
                 .orderByChild("uid")
                 .equalTo(uid)
@@ -71,25 +121,31 @@ public class Loginok extends AppCompatActivity {
         SharedPreferences settings=getSharedPreferences("PREFS_NAME",MODE_PRIVATE);
         Boolean isChecked=settings.getBoolean("stayConnect",false);
         cBconnectview.setChecked(isChecked);}
-        com.google.firebase.database.ValueEventListener VEL = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
+    com.google.firebase.database.ValueEventListener VEL = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            if (dataSnapshot.exists()){
 
-                    for(DataSnapshot data : dataSnapshot.getChildren()){
+                for(DataSnapshot data : dataSnapshot.getChildren()){
                     User user = data.getValue(User.class);
-
-
                     tVnameview.setText(user.getName());
                     tVidview.setText(user.getid());
                     tVphoneview.setText(user.getPhone());
-                    coach2=user.getCoach();
+                    if (user.getCoach())
+                        t.setText("Coach information");
+                    if (!user.getCoach()) {
+                        t.setText("Player information");
+                    }
 
-                    if (coach2)
-                        tVcoachview.setVisibility(View.VISIBLE);
-                    } }}
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) { }};
+                }
+
+            }}
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+        }
+    };*/
 
     public void update(View view) {
         FirebaseUser user = refAuth.getCurrentUser();
