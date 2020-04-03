@@ -19,10 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 
 import java.util.ArrayList;
-
-import static com.example.mybeta1.FBref.refAuth;
 import static com.example.mybeta1.FBref.refTeams;
-import static com.example.mybeta1.FBref.refUsers;
 
 
 public class addTeam extends AppCompatActivity {
@@ -43,6 +40,8 @@ public class addTeam extends AppCompatActivity {
         teamEX=false;
         Intent i=getIntent();
         Ncoach=i.getStringExtra("name");
+
+
     }
 
     com.google.firebase.database.ValueEventListener VEL = new ValueEventListener() {
@@ -51,9 +50,7 @@ public class addTeam extends AppCompatActivity {
             teamEX=false;
             if (dataSnapshot.exists()){
                 teamEX=true; }
-/*                for(DataSnapshot data : dataSnapshot.getChildren()){
-                       teamEX=true; }
-            }*/
+
         }
 
         @Override
@@ -76,7 +73,6 @@ public class addTeam extends AppCompatActivity {
             refTeams.child(tname).setValue(t);
             Toast.makeText(addTeam.this, "Team added successfully", Toast.LENGTH_LONG).show();
             Intent si = new Intent(addTeam.this, Coachmain.class);
-            si.putExtra("name",Ncoach);
             startActivity(si); }
         else
             Toast.makeText(addTeam.this, "Team already exist", Toast.LENGTH_LONG).show(); }

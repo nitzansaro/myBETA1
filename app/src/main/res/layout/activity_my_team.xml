@@ -15,23 +15,30 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@android:dimen/app_icon_size"
         android:text="My team" />
 
     <Space
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <ListView
         android:id="@+id/list1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_width="wrap_content"
+        android:layout_weight="2"
+        android:layout_height="wrap_content">
 
     </ListView>
 
-    <Space
+    <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:onClick="back"
+        android:text="back">
+
+    </Button>
+
+
 </LinearLayout>

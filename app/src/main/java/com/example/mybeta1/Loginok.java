@@ -28,18 +28,14 @@ import static com.example.mybeta1.FBref.refUsers;
 
 public class Loginok extends AppCompatActivity {
 
-    String name,   id,cOp1;
+
     TextView tVnameview, tVemailview, tVuidview, tVidview,tVcoachview,tVphoneview,t;
     CheckBox cBconnectview;
-    Boolean coach2;
+
     FirebaseUser user = refAuth.getCurrentUser();
     String uid = user.getUid();
     String email=user.getEmail();
-    String a;
-    String b;
-    //boolean c;
-    String d;
-    String n,p,i,c;
+    String n,p1,i,c;
 
 
 
@@ -55,12 +51,12 @@ public class Loginok extends AppCompatActivity {
         tVcoachview = (TextView) findViewById(R.id.tVcoachview);
         cBconnectview = (CheckBox) findViewById(R.id.cBconnectview);
         t=findViewById(R.id.titl);
-        //tVnameview.setText("idan");
+
         Intent ins=getIntent();
         n=ins.getStringExtra("n");
-        p=ins.getStringExtra("p");
+        p1=ins.getStringExtra("p");
         i=ins.getStringExtra("i");
-        c=ins.getStringExtra("cOp");
+        c=ins.getStringExtra("c");
 
 
         /*refUsers.child("Player").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -92,7 +88,7 @@ public class Loginok extends AppCompatActivity {
         tVuidview.setText(uid);
         tVnameview.setText(n);
         tVidview.setText(i);
-        tVphoneview.setText(p);
+        tVphoneview.setText(p1);
         t.setText(c + "information");
         SharedPreferences settings=getSharedPreferences("PREFS_NAME",MODE_PRIVATE);
         Boolean isChecked=settings.getBoolean("stayConnect",false);
@@ -101,63 +97,11 @@ public class Loginok extends AppCompatActivity {
     }
 
 
-    /*@Override
-    public void onStart() {
-        super.onStart();
-         //אחרי שיעבוד זה יצטרך לקבל מידע מהמניו, איך יגשים למה שמתחת למאמן/שחקן
-        Intent i=getIntent();
-        //cOp1= i.getStringExtra("cOp");
-        FirebaseUser user = refAuth.getCurrentUser();
-        uid = user.getUid();
-        Query query = refUsers
-                .orderByChild("uid")
-                .equalTo(uid)
-                .limitToFirst(1);
-        query.addListenerForSingleValueEvent(VEL);
-        email = user.getEmail();
-        tVemailview.setText(email);
-        uid = user.getUid();
-        tVuidview.setText(uid);
-        SharedPreferences settings=getSharedPreferences("PREFS_NAME",MODE_PRIVATE);
-        Boolean isChecked=settings.getBoolean("stayConnect",false);
-        cBconnectview.setChecked(isChecked);}
-    com.google.firebase.database.ValueEventListener VEL = new ValueEventListener() {
-        @Override
-        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            if (dataSnapshot.exists()){
 
-                for(DataSnapshot data : dataSnapshot.getChildren()){
-                    User user = data.getValue(User.class);
-                    tVnameview.setText(user.getName());
-                    tVidview.setText(user.getid());
-                    tVphoneview.setText(user.getPhone());
-                    if (user.getCoach())
-                        t.setText("Coach information");
-                    if (!user.getCoach()) {
-                        t.setText("Player information");
-                    }
 
-                }
+   /* public void update(View view) {
 
-            }}
-
-        @Override
-        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-        }
-    };*/
-
-    public void update(View view) {
-        FirebaseUser user = refAuth.getCurrentUser();
-        if (!cBconnectview.isChecked()){
-            refAuth.signOut();
-        }
-        SharedPreferences settings=getSharedPreferences("PREFS_NAME1",MODE_PRIVATE);
-        SharedPreferences.Editor editor=settings.edit();
-        editor.putBoolean("stayConnect",cBconnectview.isChecked());
-        editor.apply(); //changed from commit
-        finish();
-    }
+    }*/
 
     public boolean onCreateOptionsMenu (Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -167,17 +111,46 @@ public class Loginok extends AppCompatActivity {
     public boolean onOptionsItemSelected (MenuItem item) {
         int id=item.getItemId();
         if (id==R.id.menuCredits) {
-            Intent si = new Intent(Loginok.this,MainActivity.class);
+            Intent si = new Intent(Loginok.this,Myteams.class);
             startActivity(si);
         }
         if (id==R.id.menuProfile) {
+
             Intent si = new Intent(Loginok.this,Loginok.class);
+            si.putExtra("n",n);
+            si.putExtra("p",p1);
+            si.putExtra("i",i);
+            if (c.equals("Player")){
+               si.putExtra("cOp","player");}
+            else { si.putExtra("cOp","coach");}
             startActivity(si);
+
+        }
+
+        if (id==R.id.menuout) {
+            FirebaseUser user = refAuth.getCurrentUser();
+            if (!cBconnectview.isChecked()){
+                refAuth.signOut();
+            }
+            SharedPreferences settings=getSharedPreferences("PREFS_NAME1",MODE_PRIVATE);
+            SharedPreferences.Editor editor=settings.edit();
+            editor.putBoolean("stayConnect",cBconnectview.isChecked());
+            editor.apply(); //changed from commit
+            finish();
+            Intent si = new Intent(Loginok.this,MainActivity.class);
+            startActivity(si);
+
         }
 
         if (id==R.id.menuMain) {
-            Intent si = new Intent(Loginok.this,Main3Activity.class);
-            startActivity(si);
+            if (c.equals("Player")){
+                Intent si = new Intent(Loginok.this,Main3Activity.class);
+                startActivity(si);
+            }
+            else {
+                Intent si = new Intent(Loginok.this,Coachmain.class);
+                startActivity(si);
+            }
         }
 
         return true;

@@ -7,31 +7,18 @@
     android:orientation="vertical"
     android:gravity="center"
     tools:context=".Myteams">
+<Space
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
+    ></Space>
     <TextView
-        android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+
+
         android:textSize="@android:dimen/app_icon_size"
-        android:text="My team" />
+android:text="nitzan saroudi">
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <ListView
-        android:id="@+id/list2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-    </ListView>
-
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
+    </TextView>
 </LinearLayout>

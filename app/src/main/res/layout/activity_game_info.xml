@@ -8,15 +8,15 @@
     android:gravity="center"
     tools:context=".gameInfo">
 
-    <EditText
-        android:id="@+id/date"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:ems="10"
+ <EditText
+     android:id="@+id/date"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content">
 
-        android:inputType="textPersonName"
-        android:hint="Date (dd/mm/yyyy)" />
+ </EditText>
+
+
+
 
 
 

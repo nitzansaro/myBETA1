@@ -70,7 +70,7 @@ public class Main2Activity extends AppCompatActivity {
 
         SharedPreferences settings=getSharedPreferences("PREFS_NAME",MODE_PRIVATE);
         firstrun=settings.getBoolean("firstRun",false);
-        Toast.makeText(this, ""+firstrun, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, ""+firstrun, Toast.LENGTH_SHORT).show();
         if (firstrun) {
             tVtitle.setText("Register");
             eTname.setVisibility(View.VISIBLE);
@@ -90,9 +90,7 @@ public class Main2Activity extends AppCompatActivity {
         super.onStart();
         SharedPreferences settings=getSharedPreferences("PREFS_NAME",MODE_PRIVATE);
         Boolean isChecked=settings.getBoolean("stayConnect",false);
-        //isChecked=false;
-        Boolean c = settings.getBoolean("coach",false);
-        if (c && refAuth.getCurrentUser()!=null && isChecked){
+        /*if (c && refAuth.getCurrentUser()!=null && isChecked){
             Intent si = new Intent(Main2Activity.this, Coachmain.class);
             si.putExtra("cOp",coach);
             si.putExtra("name",name);
@@ -102,8 +100,14 @@ public class Main2Activity extends AppCompatActivity {
         if (refAuth.getCurrentUser()!=null && isChecked && !c) {
             Intent si = new Intent(Main2Activity.this, Main3Activity.class);
             stayConnect=true;
+
+
             startActivity(si);
         }
+        //isChecked=false;
+     */   //Boolean c = settings.getBoolean("coach",false);
+
+
     }
 
     /**
@@ -185,6 +189,7 @@ public class Main2Activity extends AppCompatActivity {
                                 Log.d("Main2Activity", "signinUserWithEmail:success");
                                 Toast.makeText(Main2Activity.this, "Login Success", Toast.LENGTH_LONG).show();
                                 Boolean c = settings.getBoolean("coach",false);
+
                                 if (c){
                                     Intent si = new Intent(Main2Activity.this, Coachmain.class);
                                    // si.putExtra("cOp",coach);
@@ -194,8 +199,8 @@ public class Main2Activity extends AppCompatActivity {
                                 else{
                                     Intent si = new Intent(Main2Activity.this, Main3Activity.class);
                                 //si.putExtra("cOp",coach);
-                                si.putExtra("name",name);
-                                startActivity(si);}
+                                    si.putExtra("name",name);
+                                    startActivity(si);}
 
                             } else {
                                 Log.d("Main2Activity", "signinUserWithEmail:fail");
@@ -247,7 +252,6 @@ public class Main2Activity extends AppCompatActivity {
                                     refUsers.child("Player").child(name).setValue(userdb);
                                     Toast.makeText(Main2Activity.this, "Successful registration", Toast.LENGTH_LONG).show();
                                     Intent si = new Intent(Main2Activity.this, playeraddt.class);
-
                                     si.putExtra("name",name);
                                     startActivity(si);
 

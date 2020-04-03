@@ -8,4 +8,64 @@
     android:gravity="center"
     tools:context=".listofteams">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_weight="0.3"
+        android:textSize="@android:dimen/app_icon_size"
+        android:text="My teams" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="116dp"
+        android:layout_weight="0.1"
+        android:orientation="horizontal">
+
+
+        <Spinner
+            android:id="@+id/spin"
+            android:layout_width="281dp"
+            android:layout_height="match_parent"
+            android:layout_weight="9" />
+
+
+        <Button
+            android:id="@+id/b"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="choose"
+            android:text="choose team">
+
+        </Button>
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+    <ListView
+        android:id="@+id/list1"
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:layout_weight="1"/>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+android:text="finish"
+        android:onClick="back"
+        android:id="@+id/back">
+
+    </Button>
 </LinearLayout>

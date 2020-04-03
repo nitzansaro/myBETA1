@@ -40,7 +40,8 @@ public class Coachmain extends AppCompatActivity implements AdapterView.OnItemCl
     ArrayList tList = new ArrayList<>();
   ListView lv;
 
-    String cOp1,coachName,tname;
+
+    String c1,coachName,tname;
     FirebaseUser user = refAuth.getCurrentUser();
     String uid=user.getUid(), email = user.getEmail();
     AlertDialog.Builder ad;
@@ -57,8 +58,23 @@ public class Coachmain extends AppCompatActivity implements AdapterView.OnItemCl
         tvNAME=findViewById(R.id.tvNAME);
         tvGAME=findViewById(R.id.tvGame);
 
+        /*refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    User u = ds.getValue(User.class);
+                    if (uid.equals(u.getUid()))
+                        coachName=u.getName();
+                }
+                Toast.makeText(Coachmain.this, coachName, Toast.LENGTH_LONG).show();
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+        tvNAME.setText("Hello " + coachName + "!");*/
     }
 
 
@@ -78,8 +94,8 @@ public class Coachmain extends AppCompatActivity implements AdapterView.OnItemCl
                 for(DataSnapshot data : dataSnapshot.getChildren()){
                     Game g = data.getValue(Game.class);
 
-                    //assert g != null;
-                    if (g.getDate().equals(str)){
+                    assert g != null;
+                    if (g.getDate().equals(gList.get(position))){
                         tv1.setText("A " + g.getCategory() + " game versus " + g.getTeamName2());
                         tv3.setText(g.getTime() + " " + g.getDate() + " at " + g.getPlace());
                         ad.setTitle(g.getTeamName());
@@ -97,8 +113,9 @@ public class Coachmain extends AppCompatActivity implements AdapterView.OnItemCl
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 //String str= ClientList.get(position);
-                Toast.makeText(Coachmain.this, str, Toast.LENGTH_LONG).show();
-                refGame.child(str).removeValue();
+                Toast.makeText(Coachmain.this, gList.get(position), Toast.LENGTH_LONG).show();
+                refGame.child(gList.get(position)).removeValue();
+                recreate();
                 dialogInterface.dismiss();
             }
         });
@@ -131,6 +148,8 @@ public class Coachmain extends AppCompatActivity implements AdapterView.OnItemCl
         query.addListenerForSingleValueEvent(VEL1);
         email = user.getEmail();
         uid = user.getUid(); }
+
+
     com.google.firebase.database.ValueEventListener VEL1 = new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -148,10 +167,14 @@ public class Coachmain extends AppCompatActivity implements AdapterView.OnItemCl
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             for (DataSnapshot ds : dataSnapshot.getChildren()) {
                                 Team t = ds.getValue(Team.class);
+                                c1=t.getCoachname();
                                 ArrayList<String> a = t.getPlayerslist();
-                                if (a.get(0).equals(coachName)){
+
+                               // if (a.get(0).equals(coachName)){
+                                //if (t.getCoachname().equals(coachName)){
+                                if(c1.equals(coachName))
                                     tList.add(t.getTeamname());
-                                }
+
 
                                 tvGAME.setText("your teams upcoming games");
 
@@ -208,12 +231,16 @@ public class Coachmain extends AppCompatActivity implements AdapterView.OnItemCl
 
 
     public void toTeams(View view) {
-        //activity lv (teams)
+        Intent si = new Intent(Coachmain.this,listofteams.class);
+        si.putExtra("cname",coachName);
+        startActivity(si);
+
     }
 
     public void toaddTeam(View view) {
 
         Intent si = new Intent(Coachmain.this,addTeam.class);
+        si.putExtra("name",coachName);
         startActivity(si);
 
     }
@@ -234,24 +261,30 @@ public class Coachmain extends AppCompatActivity implements AdapterView.OnItemCl
     public boolean onOptionsItemSelected (MenuItem item) {
         int id=item.getItemId();
         if (id==R.id.menuCredits) {
-            Intent si = new Intent(Coachmain.this,MainActivity.class);
+            Intent si = new Intent(Coachmain.this,Myteams.class);
+            si.putExtra("c","coach");
             startActivity(si);
         }
         if (id==R.id.menuProfile) {
             Intent si = new Intent(Coachmain.this,Loginok.class);
-           // si.putExtra("n",p.getName());
-            //si.putExtra("p",p.getPhone());
-           // si.putExtra("i",p.getid());
-           // if (p.getCoach())
-            //    si.putExtra("c","coach");
-            //if (!p.getCoach())
-               // si.putExtra("c","player");
+           si.putExtra("n",p.getName());
+           si.putExtra("p",p.getPhone());
+           si.putExtra("i",p.getid());
+           si.putExtra("c","coach");
+
             startActivity(si);
         }
 
         if (id==R.id.menuMain) {
-            Intent si = new Intent(Coachmain.this,Main3Activity.class);
+            Intent si = new Intent(Coachmain.this,Coachmain.class);
             startActivity(si);
+        }
+
+        if (id==R.id.menuout) {
+            refAuth.signOut();
+            Intent si = new Intent(Coachmain.this,MainActivity.class);
+            startActivity(si);
+
         }
 
         return true;
