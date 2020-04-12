@@ -18,62 +18,115 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="2"
+        android:layout_weight="10"
         android:orientation="vertical">
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1" />
+            android:layout_weight="1" />
 
         <TextView
+            android:id="@+id/tvNAME"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.5"
+            android:layout_weight="2"
             android:gravity="center"
-            android:id="@+id/tvNAME"
+            android:textColor="#E91E1E"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1" />
+            android:layout_weight="1" />
 
 
-
-        <Button
-            android:onClick="toTeams"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_weight="2">
 
-            android:id="@+id/coachteams"
-            android:text="My teams"
-            android:layout_weight="0.2"/>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5" />
+
+
+            <Button
+                android:id="@+id/coachteams"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_weight="5"
+                android:background="#69F0AE"
+                android:onClick="toTeams"
+                android:text="My teams"
+                android:textColor="#536DFE"
+                android:textSize="20sp" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5" />
+
+
+
+
+        </LinearLayout>
+
+
+
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1" />
+            android:layout_weight="1" />
 
-        <Button
-            android:id="@+id/addteam"
-            android:onClick="toaddTeam"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:text="add team"
+            android:layout_weight="2"
+            >
 
-            android:layout_weight="0.3"/>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/addteam"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#CBFFEB3B"
+                android:onClick="toaddTeam"
+                android:text="add team"
+
+                android:textAllCaps="true"
+                android:textColor="#FF9100"
+                android:textColorLink="#FFFFFF"
+                android:textStyle="italic" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+
 
 
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.3"
+            android:layout_weight="3"
             android:gravity="center"
             android:id="@+id/tvGame"
             android:text="your games"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="20sp"
 
             android:textStyle="bold" />
@@ -81,33 +134,40 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1" />
+            android:layout_weight="1" />
 
 
         <ListView
             android:id="@+id/lv"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.5"
+            android:layout_weight="6"
+            android:background="#5E40C4FF"
+            android:cacheColorHint="#FF5252"
             android:text="games" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1" />
+            android:layout_weight="1" />
 
         <Button
             android:onClick="toaddGAME"
             android:id="@+id/addgame"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.2"
-            android:text="add game"/>
+            android:layout_weight="2"
+            android:text="New game"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:background="@drawable/costum_button"
+            android:textAllCaps="false"/>
+
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1" />
+            android:layout_weight="1" />
 
     </LinearLayout>
 

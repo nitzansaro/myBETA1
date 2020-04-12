@@ -25,11 +25,12 @@
             android:layout_weight="0.7" />
 
         <TextView
+            android:id="@+id/titl"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1.5"
             android:gravity="center"
-            android:id="@+id/titl"
+            android:textColor="#F10A0A"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -38,10 +39,10 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:visibility="invisible"
             android:text="coach"
+            android:textColor="#FF6E40"
 
-            />
+            android:visibility="invisible" />
 
         <Space
             android:layout_width="match_parent"
@@ -52,7 +53,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="name" />
+            android:text="name"
+            android:textColor="#FFD740" />
 
         <TextView
             android:id="@+id/tVnameview"
@@ -73,7 +75,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="phone number" />
+            android:text="phone number"
+            android:textColor="#B2FF59" />
 
         <TextView
             android:id="@+id/tVphoneview"
@@ -85,11 +88,13 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.5" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="id" />
+            android:text="id"
+            android:textColor="#69F0AE" />
 
         <TextView
             android:id="@+id/tVidview"
@@ -107,7 +112,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="e-mail" />
+            android:text="e-mail"
+            android:textColor="#40C4FF"
+            android:textColorHighlight="#40C4FF" />
 
         <TextView
             android:id="@+id/tVemailview"
@@ -124,7 +131,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="Uid" />
+            android:text="Uid"
+            android:textColor="#448AFF"
+            android:textColorHighlight="#FFFFFF" />
 
         <TextView
             android:id="@+id/tVuidview"
@@ -142,14 +151,16 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:visibility="invisible"
-            android:text="team number" />
+            android:text="team number"
+            android:textColor="#7C4DFF"
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/tVtnumview1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textColor="#7C4DFF" />
 
         <Space
             android:layout_width="match_parent"
@@ -170,7 +181,8 @@
             android:id="@+id/tVtnameview1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textColor="#E040FB" />
 
         <Space
             android:layout_width="match_parent"
@@ -178,17 +190,13 @@
             android:layout_weight="0.5" />
 
 
-
-
-
-
-
         <CheckBox
             android:id="@+id/cBconnectview"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="Stay Connected" />
+            android:text="Stay Connected"
+            android:textColor="#FF4081" />
 
         <Space
             android:layout_width="match_parent"
@@ -211,8 +219,10 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
+                android:background="#FFD740"
                 android:onClick="update"
-                android:text="Update connect" />
+                android:text="Update connect"
+                android:textColor="#536DFE" />
 
             <Space
                 android:layout_width="0dp"

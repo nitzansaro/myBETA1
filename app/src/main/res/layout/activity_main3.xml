@@ -11,7 +11,7 @@
     <Space
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_weight="0.4" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -27,16 +27,17 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.5"
+            android:layout_weight="6"
             android:gravity="center"
             android:id="@+id/tv"
             android:textSize="20sp"
+            android:textColor="#E91E1E"
             android:textStyle="bold" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1" />
+            android:layout_weight="1" />
 
         <Button
             android:onClick="toTeam"
@@ -44,38 +45,44 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:text="My team"
-            android:layout_weight="0.2"/>
+            android:textColor="#536DFE"
+            android:background="#69F0AE"
+            android:layout_weight="3"/>
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1" />
+            android:layout_weight="1" />
 
 
 
 
 
         <TextView
-android:text="games  "    android:layout_width="match_parent"
+            android:text="games  "
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.3"
+            android:layout_weight="2"
             android:gravity="center"
             android:id="@+id/tv2"
             android:textSize="20sp"
+            android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1" />
+            android:layout_weight="1" />
 
 
         <ListView
             android:id="@+id/lv"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.5"
+            android:layout_weight="17"
             android:visibility="visible"
+            android:background="#40C4FF"
+            android:cacheColorHint="#FF5252"
             android:text="games" />
 
         <Space
@@ -90,7 +97,7 @@ android:text="games  "    android:layout_width="match_parent"
     <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="0.4" />
 
 
 

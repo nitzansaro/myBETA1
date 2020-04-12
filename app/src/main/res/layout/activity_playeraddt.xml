@@ -18,8 +18,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.2"
+        android:text="Add team "
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textColor="#FF4093"
         android:textSize="40dp"
-        android:text="Add team (Player)"/>
+        android:textStyle="bold|italic"
+        android:typeface="sans" />
 
     <Space
         android:layout_width="match_parent"
@@ -27,15 +31,15 @@
         android:layout_weight="0.1"/>
 
 
-
     <EditText
         android:id="@+id/name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
+        android:layout_height="71dp"
         android:layout_weight="0.1"
-        android:hint="Team name" />
+        android:ems="10"
+        android:hint="Team name"
+        android:textColorHint="#69F0AE"
+        android:inputType="textPersonName" />
 
     <Space
         android:layout_width="match_parent"
@@ -49,7 +53,9 @@
         android:ems="10"
         android:hint="Team number"
         android:layout_weight="0.1"
-        android:inputType="number" />
+        android:inputType="number"
+        android:textColorHighlight="#FFD740"
+        android:textColorHint="#FFD740"/>
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,7 +65,10 @@
         android:onClick="submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Submit" />
+        android:text="Submit"
+        android:textColor="#2C0C85"
+        android:textSize="20sp"
+        android:background="#E040FB"/>
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

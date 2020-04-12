@@ -25,13 +25,14 @@
             android:layout_weight="0.5" />
 
         <TextView
+            android:id="@+id/tVtitle"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:id="@+id/tVtitle"
-            android:text="Login"
             android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:text="Login"
+            android:textColor="#BF0F0F"
             android:textStyle="bold" />
 
         <Space
@@ -67,21 +68,16 @@
         </LinearLayout>
 
 
-
-
-
-
-
-
         <EditText
             android:id="@+id/eTname"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1.5"
-            android:visibility="invisible"
             android:ems="9"
             android:hint="name"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="#FF5252"
+            android:visibility="invisible" />
 
         <Space
             android:layout_width="match_parent"
@@ -95,7 +91,8 @@
             android:layout_weight="1.5"
             android:ems="9"
             android:hint="e-mail"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textColorHint="#FF6E40" />
 
         <Space
             android:layout_width="match_parent"
@@ -109,13 +106,13 @@
             android:layout_weight="1.5"
             android:ems="9"
             android:hint="password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColorHint="#FFAB40" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.5" />
-
 
 
         <EditText
@@ -123,35 +120,32 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1.5"
-            android:visibility="invisible"
             android:ems="9"
             android:hint="phone"
-            android:inputType="phone" />
+            android:inputType="phone"
+            android:textColorHint="#FFFF00"
+            android:visibility="invisible" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.5" />
+
         <EditText
             android:id="@+id/eTid"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1.5"
-            android:visibility="invisible"
             android:ems="9"
             android:hint="id"
-            android:inputType="phone" />
+            android:inputType="phone"
+            android:textColorHint="#B2FF59"
+            android:visibility="invisible" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.5" />
-
-
-
-
-
-
 
 
         <CheckBox
@@ -159,7 +153,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="Stay Connected" />
+            android:text="Stay Connected"
+            android:textColor="#69F0AE" />
 
         <Space
             android:layout_width="match_parent"
@@ -193,8 +188,10 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
+                android:background="#B2FFAB40"
                 android:onClick="logorreg"
-                android:text="Login" />
+                android:text="Login"
+                android:textColor="#448AFF" />
 
             <Space
                 android:layout_width="0dp"

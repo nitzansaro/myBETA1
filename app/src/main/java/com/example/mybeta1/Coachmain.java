@@ -57,24 +57,6 @@ public class Coachmain extends AppCompatActivity implements AdapterView.OnItemCl
         lv.setOnItemClickListener(this);
         tvNAME=findViewById(R.id.tvNAME);
         tvGAME=findViewById(R.id.tvGame);
-
-        /*refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    User u = ds.getValue(User.class);
-                    if (uid.equals(u.getUid()))
-                        coachName=u.getName();
-                }
-                Toast.makeText(Coachmain.this, coachName, Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        tvNAME.setText("Hello " + coachName + "!");*/
     }
 
 

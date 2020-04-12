@@ -17,8 +17,9 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@android:dimen/app_icon_size"
-        android:text="My team" />
+        android:text="My team"
+        android:textColor="#EC407A"
+        android:textSize="@android:dimen/app_icon_size" />
 
     <Space
         android:layout_width="wrap_content"
@@ -27,16 +28,20 @@
     <ListView
         android:id="@+id/list1"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_weight="2"
-        android:layout_height="wrap_content">
+        android:background="#C5E1A5"
+        android:cacheColorHint="#A5D6A7">
 
     </ListView>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#FFE082"
         android:onClick="back"
-        android:text="back">
+        android:text="back"
+        android:textColor="#5C6BC0">
 
     </Button>
 
