@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:layout_gravity="center"
-    tools:context=".Loginok">
+    tools:context=".profile">
 
     <Space
         android:layout_width="0dp"
@@ -31,18 +31,10 @@
             android:layout_weight="1.5"
             android:gravity="center"
             android:textColor="#F10A0A"
-            android:textSize="20sp"
+            android:textColorHighlight="#FFFFFF"
+            android:textColorLink="#FFFFFF"
+            android:textSize="30sp"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tVcoachview"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="coach"
-            android:textColor="#FF6E40"
-
-            android:visibility="invisible" />
 
         <Space
             android:layout_width="match_parent"
@@ -54,14 +46,18 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="name"
-            android:textColor="#FFD740" />
+            android:textColor="#FFD740"
+            android:textColorHighlight="#FFFFFF"
+            android:textColorLink="#FFFFFF" />
 
         <TextView
             android:id="@+id/tVnameview"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            />
+            android:textColor="#0B0B0B"
+            android:textColorHighlight="#FFFFFF"
+            android:textColorLink="#FFFFFF" />
 
 
 
@@ -76,13 +72,19 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="phone number"
-            android:textColor="#B2FF59" />
+            android:textColor="#8DD33C"
+            android:textColorHighlight="#FFFFFF"
+            android:textColorLink="#FFFFFF" />
 
         <TextView
             android:id="@+id/tVphoneview"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:layout_gravity="left"
+            android:textColor="#000000"
+            android:textColorHighlight="#FFFFFF"
+            android:textColorLink="#FFFFFF" />
 
         <Space
             android:layout_width="match_parent"
@@ -94,13 +96,19 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="id"
-            android:textColor="#69F0AE" />
+            android:textColor="#48FAA3"
+            android:textColorHighlight="#FFFFFF"
+            android:textColorLink="#FFFFFF" />
 
         <TextView
             android:id="@+id/tVidview"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textColor="#000000"
+            android:textColorHighlight="#FFFFFF"
+            android:layout_gravity="left"
+            android:textColorLink="#FFFFFF" />
 
         <Space
             android:layout_width="match_parent"
@@ -114,75 +122,18 @@
             android:layout_weight="1"
             android:text="e-mail"
             android:textColor="#40C4FF"
-            android:textColorHighlight="#40C4FF" />
+            android:textColorHighlight="#651FFF"
+            android:textColorLink="#FFFFFF" />
 
         <TextView
             android:id="@+id/tVemailview"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="Uid"
-            android:textColor="#448AFF"
-            android:textColorHighlight="#FFFFFF" />
+            android:textColor="#070707"
+            android:textColorHighlight="#FFFFFF"
+            android:textColorLink="#FFFFFF" />
 
-        <TextView
-            android:id="@+id/tVuidview"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5" />
-
-        <TextView
-            android:id="@+id/tVtnumview"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="team number"
-            android:textColor="#7C4DFF"
-            android:visibility="invisible" />
-
-        <TextView
-            android:id="@+id/tVtnumview1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:textColor="#7C4DFF" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5" />
-
-        <TextView
-
-            android:id="@+id/tVtnameview"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:visibility="invisible"
-            android:text="team name" />
-
-
-        <TextView
-            android:id="@+id/tVtnameview1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:textColor="#E040FB" />
 
         <Space
             android:layout_width="match_parent"
@@ -196,7 +147,9 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="Stay Connected"
-            android:textColor="#FF4081" />
+            android:textColor="#FF4081"
+            android:textColorHighlight="#FFFFFF"
+            android:textColorLink="#FFFFFF" />
 
         <Space
             android:layout_width="match_parent"
@@ -204,37 +157,6 @@
             android:layout_weight="0.5" />
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3"
-            android:orientation="horizontal">
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:background="#FFD740"
-                android:onClick="update"
-                android:text="Update connect"
-                android:textColor="#536DFE" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-        </LinearLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5" />
     </LinearLayout>
 
     <Space

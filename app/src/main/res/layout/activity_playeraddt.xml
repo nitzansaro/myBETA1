@@ -18,9 +18,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.2"
-        android:text="Add team "
         android:fontFamily="sans-serif-condensed-medium"
-        android:textColor="#FF4093"
+        android:gravity="center"
+        android:text="Add team "
+        android:textColor="#F50057"
         android:textSize="40dp"
         android:textStyle="bold|italic"
         android:typeface="sans" />
@@ -36,10 +37,11 @@
         android:layout_width="match_parent"
         android:layout_height="71dp"
         android:layout_weight="0.1"
-        android:ems="10"
+        android:ems="60"
         android:hint="Team name"
-        android:textColorHint="#69F0AE"
-        android:inputType="textPersonName" />
+        android:textSize="20sp"
+        android:inputType="textPersonName"
+        android:textColorHint="#51BA86" />
 
     <Space
         android:layout_width="match_parent"
@@ -50,12 +52,13 @@
         android:id="@+id/number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0.1"
         android:ems="10"
         android:hint="Team number"
-        android:layout_weight="0.1"
+        android:textSize="20sp"
         android:inputType="number"
         android:textColorHighlight="#FFD740"
-        android:textColorHint="#FFD740"/>
+        android:textColorHint="#E3BA21" />
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

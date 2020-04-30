@@ -1,6 +1,4 @@
-package com.example.mybeta1;
-
-import java.sql.Time;
+package com.example.EZteam;
 
 public class Game {
     public String teamName,teamName2,place,category, time, date;

@@ -1,4 +1,4 @@
-package com.example.mybeta1;
+package com.example.EZteam;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,6 +14,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -23,14 +23,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import static com.example.mybeta1.FBref.refGame;
-import static com.example.mybeta1.FBref.refTeams;
+import static com.example.EZteam.FBref.refTeams;
+import static com.example.EZteam.FBref.refUsers;
 
 public class listofteams extends AppCompatActivity implements AdapterView.OnItemClickListener {
     ListView list1;
     Button b; Spinner sp;
-    ArrayList<String> pList = new ArrayList<>(),tList = new ArrayList<>(),dummy = new ArrayList<>();
-    String co;
+    ArrayList<String> pList = new ArrayList<>(),tList = new ArrayList<>(),Pylist = new ArrayList<>();
+    String co,str;
     AlertDialog.Builder ad;
     LinearLayout dialog;
     @Override
@@ -40,8 +40,6 @@ public class listofteams extends AppCompatActivity implements AdapterView.OnItem
         b=findViewById(R.id.b) ;
         sp=findViewById(R.id.spin);
         list1=findViewById(R.id.list1);
-       // Intent i=getIntent();
-      //  co=i.getStringExtra("cname");
 
         final String cName=getIntent().getStringExtra("cname");
         co=cName;
@@ -95,32 +93,59 @@ public class listofteams extends AppCompatActivity implements AdapterView.OnItem
     }
 
     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-        dialog = (LinearLayout) getLayoutInflater().inflate(R.layout.dialogx, null);
-        ad = new AlertDialog.Builder(this);
-        ad.setMessage("remove player?");
-        ad.setPositiveButton("remove", new DialogInterface.OnClickListener() {
+        final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        final View customLayout = getLayoutInflater().inflate(R.layout.dialogx, null);
+        builder.setView(customLayout);
+        TextView tv1 = customLayout.findViewById(R.id.tv);
+        TextView tv2 = customLayout.findViewById(R.id.tv2);
+        str = pList.get(position);
+        builder.setTitle(str);
+        //builder.setMessage(second +third + first);
+        refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    User u = ds.getValue(User.class);
+                    //assert u != null;
+                    if (str.equals(u.getName())) {
+                        TextView tv=customLayout.findViewById(R.id.tv);
+                        TextView tv2=customLayout.findViewById(R.id.tv2);
+                        tv.setText("email: " +u.getEmail() + " id: " + u.getid());
+                        tv2.setText("phone num: " +u.getPhone() + " d.o.b: " + u.getDayofbirth());
+
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        ad.setPositiveButton("remove player", new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                dummy.clear();
+                Pylist.clear();
                 int j = 0;
                 Toast.makeText(listofteams.this, pList.get(position), Toast.LENGTH_LONG).show();
                 while (j<pList.size()){
                     if (!pList.get(j).equals(pList.get(position)))
-                      dummy.add(pList.get(j));
+                      Pylist.add(pList.get(j));
                     j++;
                 }
-                refTeams.child(String.valueOf(sp.getSelectedItem())).child("Plist").setValue(dummy);
+                refTeams.child(String.valueOf(sp.getSelectedItem())).child("Plist").setValue(Pylist);
                 recreate();
                 dialogInterface.dismiss();
             }
 
         });
 
-        //dialog = (LinearLayout) getLayoutInflater().inflate(R.layout.dialogx, null);
 
         ad.setCancelable(false);
-        //ad.setTitle("game details");
+
 
         ad.setNeutralButton("exit", new DialogInterface.OnClickListener() {
             @Override
@@ -137,7 +162,7 @@ public class listofteams extends AppCompatActivity implements AdapterView.OnItem
 
     public void back(View view) {
         Intent si = new Intent(listofteams.this, Coachmain.class);
-        //si.putExtra("name",co);
+
         startActivity(si);
     }
 }

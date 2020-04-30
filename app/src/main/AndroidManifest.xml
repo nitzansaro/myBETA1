@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.mybeta1">
+    package="com.example.EZteam">
+
+    <uses-permission android:name="android.permission.SEND_SMS"/>
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="EZteam"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".listofteams"></activity>
-        <activity android:name=".Coachmain" />
-        <activity android:name=".Myteams" />
-        <activity android:name=".MyTeam" />
-        <activity android:name=".gameInfo" />
-        <activity android:name=".playeraddt" />
-        <activity android:name=".addTeam" />
-        <activity android:name=".Main3Activity" />
-        <activity android:name=".Loginok" />
-        <activity android:name=".Main2Activity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.EZteam.listofteams"></activity>
+        <activity android:name="com.example.EZteam.Coachmain" />
+        <activity android:name="com.example.EZteam.credits" />
+        <activity android:name="com.example.EZteam.MyTeam" />
+        <activity android:name="com.example.EZteam.gameInfo" />
+        <activity android:name="com.example.EZteam.playeraddt" />
+        <activity android:name="com.example.EZteam.addTeam" />
+        <activity android:name="com.example.EZteam.playermain" />
+        <activity android:name="com.example.EZteam.profile" />
+        <activity android:name="com.example.EZteam.auth" />
+        <activity android:name="com.example.EZteam.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

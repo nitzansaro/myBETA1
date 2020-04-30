@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context=".Main3Activity">
+    tools:context=".playermain">
 
 
     <Space
@@ -13,82 +13,106 @@
         android:layout_height="match_parent"
         android:layout_weight="0.4" />
 
+
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="2"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:textColor="#7C4DFF"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/tvmsg"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="updates"
+            android:textColor="#536DFE"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
+        <ListView
+            android:id="@+id/lvmsg"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="12"
+            android:background="#AA88CEED"
+            android:cacheColorHint="#FF5252"
+            android:text="games"
+            android:visibility="visible" />
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.1" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="6"
-            android:gravity="center"
-            android:id="@+id/tv"
-            android:textSize="20sp"
-            android:textColor="#E91E1E"
-            android:textStyle="bold" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
 
-        <Button
-            android:onClick="toTeam"
-            android:id="@+id/playerteam"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:text="My team"
-            android:textColor="#536DFE"
-            android:background="#69F0AE"
-            android:layout_weight="3"/>
 
-        <Space
+
+
+    <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="0.1" />
 
 
 
 
 
         <TextView
-            android:text="games  "
+            android:id="@+id/tv2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
             android:gravity="center"
-            android:id="@+id/tv2"
+            android:text="games  "
+            android:textColor="#536DFE"
             android:textSize="20sp"
-            android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+
 
 
         <ListView
             android:id="@+id/lv"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="17"
-            android:visibility="visible"
-            android:background="#40C4FF"
+            android:layout_weight="14"
+            android:background="#AA40C4FF"
             android:cacheColorHint="#FF5252"
-            android:text="games" />
+            android:text="games"
+            android:visibility="visible" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.1" />
+
+        <Button
+            android:id="@+id/playerteam"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:background="#7C0A1C7E"
+            android:onClick="toTeam"
+            android:text="My team"
+            android:textColor="#F0F1F6"
+            android:textSize="20sp" />
+
 
 
 

@@ -1,4 +1,4 @@
-package com.example.mybeta1;
+package com.example.EZteam;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,14 +8,14 @@ import android.os.Bundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Myteams extends AppCompatActivity {
+public class credits extends AppCompatActivity {
     Timer timer;
     String c;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_myteams);
+        setContentView(R.layout.credits);
         Intent i=getIntent();
         c=i.getStringExtra("c");
         timer=new Timer();
@@ -23,9 +23,9 @@ public class Myteams extends AppCompatActivity {
             @Override
             public void run() {
                 if(c.equals("coach")){
-                Intent t = new Intent (Myteams.this,Coachmain.class);
+                Intent t = new Intent (credits.this,Coachmain.class);
                 startActivity(t);}
-                else {Intent t = new Intent (Myteams.this,Main3Activity.class);
+                else {Intent t = new Intent (credits.this, playermain.class);
                     startActivity(t);}
                 finish(); }
         },   5000);

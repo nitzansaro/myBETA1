@@ -1,20 +1,22 @@
-package com.example.mybeta1;
+package com.example.EZteam;
 
 class User {
-    private String name, email, phone, uid, id,coach2,teamName,teamNum;
+    private String name, phone, uid, id,email,dayofbirth;
     private Boolean coach=false;
 
 
     public User() {
     }
 
-    public User(String name, String email, String phone, String uid, String id, Boolean coach) {
+    public User(String name, String phone, String uid, String id, Boolean coach,String email,String dayofbirth) {
         this.name = name;
-        this.email = email;
         this.phone = phone;
         this.uid = uid;
         this.coach=coach;
         this.id=id;
+        this.email=email;
+        this.dayofbirth=dayofbirth;
+
 
 
     }
@@ -25,6 +27,23 @@ class User {
 
     public void setCoach(Boolean coach2) {
         this.coach = coach;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+
+    public String getDayofbirth() {
+        return dayofbirth;
+    }
+
+    public void setDayofbirth(String dayofbirth) {
+        this.dayofbirth = dayofbirth;
     }
 
 
@@ -43,14 +62,6 @@ class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
 

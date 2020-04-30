@@ -17,14 +17,14 @@
         android:background="#FFFFFF"
         android:gravity="center"
         android:text="My teams"
-        android:textColor="#F50057"
+        android:textColor="#041357"
         android:textSize="@android:dimen/app_icon_size" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="18"
+        android:layout_weight="22"
         android:orientation="horizontal">
 
 
@@ -33,7 +33,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:background="#61FFEB3B" />
+             />
 
 
         <Button
@@ -41,10 +41,10 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:background="#FFC107"
+            android:background="#A52979FF"
             android:onClick="choose"
             android:text="choose team"
-            android:textColor="#0E0E0E">
+            android:textColor="#FFFFFF">
 
         </Button>
 
@@ -57,17 +57,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="10"
-        android:background="#79FF9800" />
+        android:background="#321D7CE9" />
 
 
     <Button
         android:id="@+id/back"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="#EDD92A"
         android:layout_weight="20"
+        android:background="#0A1B85"
         android:onClick="back"
-        android:text="finish">
+        android:text="finish"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp">
 
     </Button>
 </LinearLayout>

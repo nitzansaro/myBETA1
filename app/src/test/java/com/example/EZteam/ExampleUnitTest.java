@@ -1,4 +1,4 @@
-package com.example.mybeta1;
+package com.example.EZteam;
 
 import org.junit.Test;
 

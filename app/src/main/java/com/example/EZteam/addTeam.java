@@ -1,4 +1,4 @@
-package com.example.mybeta1;
+package com.example.EZteam;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,17 +9,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 
 import java.util.ArrayList;
-import static com.example.mybeta1.FBref.refTeams;
+import static com.example.EZteam.FBref.refTeams;
 
 
 public class addTeam extends AppCompatActivity {
@@ -75,7 +72,8 @@ public class addTeam extends AppCompatActivity {
             Intent si = new Intent(addTeam.this, Coachmain.class);
             startActivity(si); }
         else
-            Toast.makeText(addTeam.this, "Team already exist", Toast.LENGTH_LONG).show(); }
+            nameText.setError("Team already exist");
+            Toast.makeText(addTeam.this, "Try other option", Toast.LENGTH_LONG).show(); }
 
 
 

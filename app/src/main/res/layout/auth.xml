@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:layout_gravity="center"
-    tools:context=".Main2Activity">
+    tools:context=".auth">
+
+
 
     <Space
         android:layout_width="0dp"
@@ -17,6 +19,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="20"
+        android:outlineAmbientShadowColor="@android:color/holo_red_light"
         android:orientation="vertical">
 
         <Space
@@ -28,10 +31,11 @@
             android:id="@+id/tVtitle"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:autoSizeTextType="uniform"
             android:gravity="center"
             android:text="Login"
+            android:textSize="50sp"
             android:textColor="#BF0F0F"
             android:textStyle="bold" />
 
@@ -39,6 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.5" />
+
         <LinearLayout
             android:layoutDirection="ltr"
             android:layout_width="match_parent"
@@ -53,6 +58,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:visibility="invisible"
+                android:textColor="@android:color/holo_red_light"
                 style="@style/TextAppearance.AppCompat.Large"
                 android:text="player" />
 
@@ -63,6 +69,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:textColor="@android:color/holo_red_light"
                 android:visibility="invisible"
                 android:text="coach" />
         </LinearLayout>
@@ -76,7 +83,22 @@
             android:ems="9"
             android:hint="name"
             android:inputType="textPersonName"
-            android:textColor="#FF5252"
+            android:textColorHint="#FF9800"
+            android:visibility="invisible" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5" />
+        <EditText
+            android:id="@+id/eTemail"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:ems="9"
+            android:hint="mail"
+            android:inputType="textEmailAddress"
+            android:textColorHint="#FF9800"
             android:visibility="invisible" />
 
         <Space
@@ -84,35 +106,9 @@
             android:layout_height="0dp"
             android:layout_weight="0.5" />
 
-        <EditText
-            android:id="@+id/eTemail"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1.5"
-            android:ems="9"
-            android:hint="e-mail"
-            android:inputType="textEmailAddress"
-            android:textColorHint="#FF6E40" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5" />
 
-        <EditText
-            android:id="@+id/eTpass"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1.5"
-            android:ems="9"
-            android:hint="password"
-            android:inputType="textPassword"
-            android:textColorHint="#FFAB40" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5" />
 
 
         <EditText
@@ -123,13 +119,24 @@
             android:ems="9"
             android:hint="phone"
             android:inputType="phone"
-            android:textColorHint="#FFFF00"
-            android:visibility="invisible" />
+            android:textColorHint="#4CAF50"
+            android:visibility="visible" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.5" />
+
+        <TextView
+            android:id="@+id/tVb"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorPrimary"
+            android:hint="Date of birth" />
 
         <EditText
             android:id="@+id/eTid"
@@ -139,7 +146,7 @@
             android:ems="9"
             android:hint="id"
             android:inputType="phone"
-            android:textColorHint="#B2FF59"
+            android:textColorHint="#009688"
             android:visibility="invisible" />
 
         <Space
@@ -148,13 +155,17 @@
             android:layout_weight="0.5" />
 
 
+
+
         <CheckBox
             android:id="@+id/cBstayconnect"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="Stay Connected"
-            android:textColor="#69F0AE" />
+            android:textColor="#69F0AE"
+            android:textColorHighlight="#070707"
+            android:textColorLink="#0B0A0A" />
 
         <Space
             android:layout_width="match_parent"
@@ -165,7 +176,9 @@
             android:id="@+id/tVregister"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textColorHighlight="#0B0A0A"
+            android:textColorLink="#090909" />
 
         <Space
             android:layout_width="match_parent"
@@ -189,7 +202,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="4"
                 android:background="#B2FFAB40"
-                android:onClick="logorreg"
+                android:onClick="options"
                 android:text="Login"
                 android:textColor="#448AFF" />
 

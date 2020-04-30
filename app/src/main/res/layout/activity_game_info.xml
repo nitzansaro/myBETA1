@@ -5,69 +5,106 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
+   android:layout_gravity="center"
     tools:context=".gameInfo">
 
-    <EditText
-        android:id="@+id/date"
-        android:layout_width="259dp"
+
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#9C27B0">
+        android:layout_gravity="center"
+        android:layout_weight="4"
+        android:text="new game"
+        android:textColor="#000000"
+        android:textSize="40sp"></TextView>
 
-    </EditText>
+    <TextView
+        android:id="@+id/tvdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:layout_gravity="left"
+        android:text="Date"
+        android:textColor="@android:color/holo_red_light"
+        android:textColorHint="#FF5722"
+        android:textSize="20sp">
 
-
-    <EditText
-        android:id="@+id/place"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:ems="10"
-        android:hint="Place"
-        android:inputType="textPersonName"
-        android:textColorHint="#E91E63" />
+    </TextView>
 
 
     <Spinner
         android:id="@+id/teamName"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:layout_gravity="left"
         android:background="#7AFF5722" />
 
+    <EditText
+        android:id="@+id/place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        android:layout_gravity="left"
+        android:hint="Place"
+        android:inputType="textPersonName"
+        android:textColorHint="#FF5500"
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/teamName2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
         android:hint="opponent"
-        android:textColorHint="#FF9800" />
+        android:layout_gravity="left"
+        android:textColorHint="#FFAA00"
+        android:textSize="20sp" />
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2">
+
+    </Space>
 
     <Button
         android:id="@+id/time"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="#FFC107"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_weight="2"
+        android:layout_gravity="left"
+        android:background="@drawable/clock1"
         android:onClick="chooseTime"
         android:text="Choose time"
-        android:textColor="#FFFFFF" />
+        android:gravity="bottom"
+        android:textColor="#3F51B5"
+        android:textSize="10sp" />
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2">
+
+    </Space>
 
 
     <Spinner
         android:id="@+id/catagory"
-        android:layout_width="164dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="#6DEC1616" />
+        android:layout_width="104dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="8"
+        android:layout_gravity="left"
+        android:background="#40FFEB3B" />
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="#FF9800"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_weight="8"
+        android:background="#FFC400"
         android:onClick="next"
-        android:text="Next" />
+        android:text="Next"
+        android:textColor="#FAF4F4"
+        android:textSize="30sp" />
 
 </LinearLayout>
