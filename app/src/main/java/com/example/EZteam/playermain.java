@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,7 +47,10 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
     AlertDialog.Builder ad;
     TextView tv1, tv3;
     User p;
-
+    TextView  tvvv,tvv;
+    Game g = new Game();
+    AlertDialog.Builder add;
+    LinearLayout dialog;
     /**
      * creating list view for msg and games.
      * @param savedInstanceState
@@ -141,6 +145,7 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
                                             if (m.getPLayer_msg().equals(tname))
                                                 mList.add(m.getMsg());
 
+
                                         }
                                         ArrayAdapter adp = new ArrayAdapter<String>(playermain.this,R.layout.support_simple_spinner_dropdown_item, mList);
                                         lvmsg.setAdapter(adp);
@@ -165,9 +170,11 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
                                             if (g.getTeamName().equals(tname))
                                                 gList.add(g.getTeamName2());
 
+
                                         }
                                         ArrayAdapter adp = new ArrayAdapter<String>(playermain.this, R.layout.support_simple_spinner_dropdown_item, gList);
                                         lv.setAdapter(adp);
+
                                     }
 
                                     @Override
@@ -207,15 +214,6 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
                 builder.setTitle("Message from your coach");
                 builder.setMessage(str1);
 
-/*
-                builder.setPositiveButton("Delete Message", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(final DialogInterface dialogInterface, int i) {
-                        refMsg.child(tname + " " + str).removeValue();
-                        recreate();
-                        dialogInterface.cancel();
-                    }
-                });*/
 
                 builder.setNeutralButton("ok", new DialogInterface.OnClickListener() {
                     @Override
@@ -235,29 +233,32 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
              */
 
             case R.id.lv:
-                final android.app.AlertDialog.Builder builder2 = new android.app.AlertDialog.Builder(this);
+                //final android.app.AlertDialog.Builder builder2 = new android.app.AlertDialog.Builder(this);
 
 
-                final View customLayout2 = getLayoutInflater().inflate(R.layout.dialogx, null);
-                builder2.setView(customLayout2);
+                //final View customLayout2 = getLayoutInflater().inflate(R.layout.dialogx, null);
+                /*dialog = (LinearLayout) getLayoutInflater().inflate(R.layout.dialogx, null);
+                add = new AlertDialog.Builder(this);
+                add.setView(dialog);
 
+
+                ad = new AlertDialog.Builder(this);*/
                 final String str = gList.get(position);
-                ad = new AlertDialog.Builder(this);
-
                 refGame.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        TextView tv3 = customLayout2.findViewById(R.id.tv);
-                        TextView tv4 = customLayout2.findViewById(R.id.tv2);
                         for (DataSnapshot data : dataSnapshot.getChildren()) {
-                            Game g = data.getValue(Game.class);
-                            if (g.getTeamName2().equals(str)) {
-                                tv3.setText("A " + g.getCategory() + " game versus " + g.getTeamName2());
-                                tv3.setText(g.getTime() + " " + g.getDate() + " at " + g.getPlace());
-                                Toast.makeText(playermain.this, g.getTeamName2() + g.getPlace(), Toast.LENGTH_LONG).show();
+                            Game gg = data.getValue(Game.class);
+                            if (gg.getTeamName2().equals(str)) {
+                                Toast.makeText(playermain.this, gg.getCategory() + "      at " + gg.getTime() + " " + gg.getDate() + " at " + gg.getPlace(), Toast.LENGTH_LONG).show();
+                               // add.setTitle("A " + gg.getCategory() + " game versus " + gg.getTeamName2());
+                                //add.setMessage();
+
                             }
-                            
+
                         }
+                        //game1.setText();
+                        //game2.setText();
                     }
 
                     @Override
@@ -265,16 +266,16 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
 
                     }
                 });
-
-                ad.setCancelable(false);
-                ad.setNeutralButton("exit", new DialogInterface.OnClickListener() {
+                /*
+                add.setCancelable(false);
+                add.setNeutralButton("exit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.cancel();
                     }
                 });
-                AlertDialog ad2 = ad.create();
-                ad2.show();
+                AlertDialog ad2 = add.create();
+                ad2.show();*/
                 break;
         }
     }

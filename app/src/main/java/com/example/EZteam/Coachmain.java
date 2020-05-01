@@ -166,8 +166,8 @@ public class Coachmain extends AppCompatActivity implements AdapterView.OnItemCl
 
         LayoutInflater inflater = getLayoutInflater();
         View alertLayout = inflater.inflate(R.layout.dialogx, null);
-        tv1 = alertLayout.findViewById(R.id.tv1);
-        tv3 = alertLayout.findViewById(R.id.tv2);
+        tv1 = alertLayout.findViewById(R.id.game1);
+        tv3 = alertLayout.findViewById(R.id.game2);
         final String str= gList.get(position);
         ad = new AlertDialog.Builder(this);
 
@@ -228,8 +228,8 @@ public class Coachmain extends AppCompatActivity implements AdapterView.OnItemCl
 
         final View customLayout = getLayoutInflater().inflate(R.layout.dialogx, null);
         builder.setView(customLayout);
-        TextView tv=customLayout.findViewById(R.id.tv1);
-        TextView tv2=customLayout.findViewById(R.id.tv2);
+        TextView tv=customLayout.findViewById(R.id.game1);
+        TextView tv2=customLayout.findViewById(R.id.game2);
         EditText edmsg = customLayout.findViewById(R.id.edmsg);
 
         tv.setVisibility(View.INVISIBLE);

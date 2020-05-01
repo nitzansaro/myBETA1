@@ -99,14 +99,8 @@ public class profile extends AppCompatActivity {
         }
 
         if (id==R.id.menuMain) {
-            if (c.equals("Player")){
-                Intent si = new Intent(profile.this, playermain.class);
-                startActivity(si); }
-            else {
-                if (c.equals("Coach")){
-                Intent si = new Intent(profile.this,Coachmain.class);
-                startActivity(si);
-            }}
+            finish();;
+
         }
 
         return true;

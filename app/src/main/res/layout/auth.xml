@@ -90,16 +90,17 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.5" />
+
         <EditText
             android:id="@+id/eTemail"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.5"
+            android:layout_weight="1.3"
             android:ems="9"
             android:hint="mail"
             android:inputType="textEmailAddress"
             android:textColorHint="#FF9800"
-            android:visibility="invisible" />
+            android:visibility="visible" />
 
         <Space
             android:layout_width="match_parent"
@@ -110,12 +111,12 @@
             android:id="@+id/eTpass"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.5"
+            android:layout_weight="1.3"
             android:ems="9"
             android:hint="password"
             android:inputType="textPassword"
             android:textColorHint="#FF9800"
-            android:visibility="invisible" />
+            android:visibility="visible" />
 
         <Space
             android:layout_width="match_parent"
@@ -132,7 +133,7 @@
             android:hint="phone"
             android:inputType="phone"
             android:textColorHint="#FFA000"
-            android:visibility="visible" />
+            android:visibility="invisible" />
 
         <Space
             android:layout_width="match_parent"

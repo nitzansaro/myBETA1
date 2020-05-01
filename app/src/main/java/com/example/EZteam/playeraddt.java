@@ -76,7 +76,7 @@ public class playeraddt extends AppCompatActivity {
                     refTeams.child(name1).setValue(teamt);
                     Intent a2 = new Intent(playeraddt.this, auth.class);
                     startActivity(a2);
-                    finish();
+                    //finish();
                 }
             }
             else {

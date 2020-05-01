@@ -47,6 +47,7 @@ public class gameInfo extends AppCompatActivity {
     EditText place, teamName2;
     String p1,t1,t2,c1,d1;
     String co,date;
+
     FirebaseAuth mAuth;
     String cname,date1;
     FirebaseUser user = refAuth.getCurrentUser();
@@ -56,7 +57,8 @@ public class gameInfo extends AppCompatActivity {
     private static final String TAG = "gameinfo";
     DatePickerDialog.OnDateSetListener mDateSetListener;
     BroadcastG broadcastg;
-    String thisdate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+
+
 
     /**
      * dialog picker date of the game
@@ -109,21 +111,6 @@ public class gameInfo extends AppCompatActivity {
         teamName2 = findViewById(R.id.teamName2);
         time = findViewById(R.id.time);
         category  = findViewById(R.id.catagory);
-
-/*
-        refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    User u = ds.getValue(User.class);
-                    if (uid.equals(u.getUid()))
-                        cname=u.getName();
-                } }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });*/
 
         refTeams.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -189,22 +176,13 @@ public class gameInfo extends AppCompatActivity {
         time.getText().toString();
         Game game=new Game(t1,t2,p1,c1,time.getText().toString(),date1);
         refGame.child(date).setValue(game);
-/*
-        SharedPreferences settings=getSharedPreferences("PREFS_NAME",MODE_PRIVATE);
-        SharedPreferences.Editor editor=settings.edit();
-        editor.putString("thisday",thisdate);
-        editor.putString("gameday",date1);
-        editor.putString("team1",t1);
-        editor.putString("team2",t2);
-        editor.putString("time",time.getText().toString());
-        editor.commit();
-        moveTaskToBack(true);*/
+
         Intent si = new Intent(gameInfo.this,Coachmain.class);
         startActivity(si);}
 
 
     /**
-     * making sure user wnt out
+     * making sure user want out
      */
     @Override
     public void onBackPressed() {

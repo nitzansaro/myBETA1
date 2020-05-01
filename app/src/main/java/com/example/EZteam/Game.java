@@ -1,12 +1,13 @@
 package com.example.EZteam;
-
+/**
+ * @author		Nitzan Saroudi <nitzan2892002@gmail.com>
+ * @since		1/3/2020
+ * class for the games.
+ */
 public class Game {
     public String teamName,teamName2,place,category, time, date;
-    /**
-     * @author		Nitzan Saroudi <nitzan2892002@gmail.com>
-     * @since		1/3/2020
-     * class for the games.
-     */
+
+
 
 
     public Game(){}
@@ -17,7 +18,10 @@ public class Game {
             this.place=place;
             this.time=time;
             this.date=date;
+
     }
+
+
 
     public String getTeamName() {
         return teamName;

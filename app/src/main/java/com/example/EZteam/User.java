@@ -1,6 +1,6 @@
 package com.example.EZteam;
 
-class User {
+public class User {
     private String name, phone, uid, id,email,dayofbirth;
     private Boolean coach=false;
 
