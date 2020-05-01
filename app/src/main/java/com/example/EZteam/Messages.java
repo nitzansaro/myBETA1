@@ -1,30 +1,37 @@
 package com.example.EZteam;
 
 class Messages {
-    private String trainer,client,msg;
+    private String coach,player,msg;
+
+    /**
+     * @author		Nitzan Saroudi <nitzan2892002@gmail.com>
+     * @since		30/5/2020
+     * class for the msg.
+     */
+
 
     public Messages (){}
-    public Messages(String trainer, String client, String msg) {
-        this.trainer=trainer;
-        this.client=client;
+    public Messages(String coach, String player, String msg) {
+        this.coach=coach;
+        this.player=player;
         this.msg=msg;
 
     }
 
-    public String getTrainer() {
-        return trainer;
+    public String getCoach_msg() {
+        return coach;
     }
 
-    public void setTrainer(String trainer) {
-        this.trainer=trainer;
+    public void setCoach_msg(String coach) {
+        this.coach=coach;
     }
 
-    public String getClient() {
-        return client;
+    public String getPLayer_msg() {
+        return player;
     }
 
-    public void setClient(String client) {
-        this.client=client;
+    public void setPlayer_msg(String player) {
+        this.player=player;
     }
 
     public String getMsg() {return msg;}

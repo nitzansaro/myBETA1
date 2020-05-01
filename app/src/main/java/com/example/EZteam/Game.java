@@ -2,6 +2,11 @@ package com.example.EZteam;
 
 public class Game {
     public String teamName,teamName2,place,category, time, date;
+    /**
+     * @author		Nitzan Saroudi <nitzan2892002@gmail.com>
+     * @since		1/3/2020
+     * class for the games.
+     */
 
 
     public Game(){}

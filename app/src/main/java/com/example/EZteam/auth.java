@@ -51,16 +51,16 @@ import static com.example.EZteam.FBref.refUsers;
 
 public class auth extends AppCompatActivity {
     TextView tVtitle, tVregister, tVcoach, tVb;
-    EditText eTname, eTphone,eTid,eTemail;
+    EditText eTname, eTphone, eTid, eTemail;
     CheckBox cBstayconnect;
     Switch pOrc;
-    public static FirebaseAuth refAuth=FirebaseAuth.getInstance();
+    public static FirebaseAuth refAuth = FirebaseAuth.getInstance();
     AlertDialog ad1;
 
     private static final String TAG = "Phone";
-    String name, phone, uid,id,code,mVerificationId,birthday,email;
+    String name, phone, uid, id, code, mVerificationId, birthday, email;
     User currentUser;
-    Boolean stayConnect, registered, firstrun1,isUID=false,coach,isCoach;
+    Boolean stayConnect, registered, firstrun1, isUID = false, coach, isCoach;
     Boolean mVerificationInProgress = false;
     Button btn;
     FirebaseUser user;
@@ -69,30 +69,19 @@ public class auth extends AppCompatActivity {
     DatePickerDialog.OnDateSetListener mDateSetListener;
 
 
-
-
-
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.auth);
 
-        /**
-         * dialog day of birth, the user should enter his correct date.
 
-         */
-        tVb=findViewById(R.id.tVb);
+        tVb = findViewById(R.id.tVb);
         tVb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Calendar cal = Calendar.getInstance();
                 int year = cal.get(Calendar.YEAR);
-                year=year-25;
+                year = year - 25;
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
@@ -107,43 +96,39 @@ public class auth extends AppCompatActivity {
          * listener for when the user set his date.
          * user's day of birth = birthday .
          */
-        mDateSetListener= new DatePickerDialog.OnDateSetListener() {
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month++;
-                birthday = dayOfMonth +"/" + month +"/" +year;
+                birthday = dayOfMonth + "/" + month + "/" + year;
 
 
             }
         };
 
         pOrc = findViewById(R.id.pOrc);
-        tVcoach=findViewById(R.id.tVcoach4);
-        tVtitle=(TextView) findViewById(R.id.tVtitle);
-        eTid=(EditText)findViewById(R.id.eTid);
-        eTname=(EditText)findViewById(R.id.eTname);
-        eTphone=(EditText)findViewById(R.id.eTphone);
-        eTemail=(EditText)findViewById(R.id.eTemail);
-        cBstayconnect=(CheckBox)findViewById(R.id.cBstayconnect);
-        tVregister=(TextView) findViewById(R.id.tVregister);
-        btn=(Button)findViewById(R.id.btn);
+        tVcoach = findViewById(R.id.tVcoach4);
+        tVtitle = (TextView) findViewById(R.id.tVtitle);
+        eTid = (EditText) findViewById(R.id.eTid);
+        eTname = (EditText) findViewById(R.id.eTname);
+        eTphone = (EditText) findViewById(R.id.eTphone);
+        eTemail = (EditText) findViewById(R.id.eTemail);
+        cBstayconnect = (CheckBox) findViewById(R.id.cBstayconnect);
+        tVregister = (TextView) findViewById(R.id.tVregister);
+        btn = (Button) findViewById(R.id.btn);
         stayConnect = false;
         registered = false;
 
 
-        /**
-         * checking whether this is the first run or not using Shared preferences.
 
-         */
-        SharedPreferences settings=getSharedPreferences("PREFS_NAME",MODE_PRIVATE);
-        firstrun1=settings.getBoolean("firstRun",true);
+        SharedPreferences settings = getSharedPreferences("PREFS_NAME", MODE_PRIVATE);
+        firstrun1 = settings.getBoolean("firstRun", true);
 
         if (firstrun1) {
 
             onVerificationStateChanged();
             regoption();
-        }
-        else {
+        } else {
             registered = true;
             onVerificationStateChanged();
             logoption();
@@ -157,10 +142,10 @@ public class auth extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        SharedPreferences settings=getSharedPreferences("PREFS_NAME",MODE_PRIVATE);
-        Boolean isChecked=settings.getBoolean("stayConnect",false);
-        if (refAuth.getCurrentUser()!=null && isChecked) {
-            stayConnect=true;
+        SharedPreferences settings = getSharedPreferences("PREFS_NAME", MODE_PRIVATE);
+        Boolean isChecked = settings.getBoolean("stayConnect", false);
+        if (refAuth.getCurrentUser() != null && isChecked) {
+            stayConnect = true;
             setUsersListener();
         }
     }
@@ -177,10 +162,7 @@ public class auth extends AppCompatActivity {
 
     }
 
-    /**
-     * login screen, just phone auth.
-     *span- to change into registration .
-     */
+
 
 
     private void logoption() {
@@ -190,15 +172,15 @@ public class auth extends AppCompatActivity {
         pOrc.setVisibility(View.INVISIBLE);
         tVcoach.setVisibility(View.INVISIBLE);
         eTid.setVisibility(View.INVISIBLE);
-        registered=true;
+        registered = true;
         btn.setText("Login");
 
         SpannableString ss = new SpannableString("Don't have an account?  Register here!");
         ClickableSpan span = new ClickableSpan() {
             @Override
             public void onClick(View textView) {
-                registered=false;
-                isUID=false;
+                registered = false;
+                isUID = false;
                 regoption();
             }
         };
@@ -207,10 +189,7 @@ public class auth extends AppCompatActivity {
         tVregister.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
-    /**
-     *registration screen, everything visible .
-     *span- to change into login and updating isuid to true because the user already exist .
-     */
+
 
     private void regoption() {
         tVtitle.setText("Register");
@@ -221,14 +200,14 @@ public class auth extends AppCompatActivity {
         eTid.setVisibility(View.VISIBLE);
         eTemail.setVisibility(View.VISIBLE);
         btn.setText("register");
-      //  registered=false;
+        //  registered=false;
 
         SpannableString ss = new SpannableString("Already have an account?  Login here!");
         ClickableSpan span = new ClickableSpan() {
             @Override
             public void onClick(View textView) {
-                isUID=true;
-                registered=true;
+                isUID = true;
+                registered = true;
                 logoption();
             }
         };
@@ -237,16 +216,10 @@ public class auth extends AppCompatActivity {
         tVregister.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
-    /**
-     * Logging in or Registering to the application
-     * Using:   Firebase Auth with phone and sms code
-     *          Firebase Realtime database with the object User
-     * If login or register process is Ok saving stay connect status
 
-     */
 
     public void options(View view) {
-        if (registered){
+        if (registered) {
             phone = eTphone.getText().toString();
             if (phone.isEmpty()) eTphone.setError("you must enter a phone number");
             else {
@@ -268,43 +241,44 @@ public class auth extends AppCompatActivity {
                             verifyPhoneNumberWithCode(mVerificationId, code);
                     }
                 });
-                ad1= adb1.create();
+                ad1 = adb1.create();
                 ad1.show();
                 Toast.makeText(this, "the code is on his way to your phone", Toast.LENGTH_SHORT).show();
             }
-        }
-        else{
+        } else {
             name = eTname.getText().toString();
             id = eTid.getText().toString();
-            email=eTemail.getText().toString();
+            email = eTemail.getText().toString();
             phone = eTphone.getText().toString();
-            uid="a";
+            uid = "a";
 
-            if (pOrc.isChecked())  coach=true;
-            else  coach=false;
+            if (pOrc.isChecked()) coach = true;
+            else coach = false;
             if (name.isEmpty()) eTname.setError("you must enter a name");
             if (email.isEmpty()) eTemail.setError("you must enter an email");
             if (id.isEmpty()) eTid.setError("you must enter id ");
             if (phone.isEmpty()) eTphone.setError("you must enter a phone number");
             if (!name.isEmpty() && !id.isEmpty() && !phone.isEmpty()) {
-               // if (Pattern.matches("[a-zA-Z]+", id) == true || id.length() != 9)
-                //    eTid.setError("invalid id");
-                //if (((!email.endsWith(".com")) || (!email.endsWith(".il"))) && (email.indexOf("@") == (-1)))
-                 //   eTemail.setError("invalid e-mail");}
-               // else {
+                 if (Pattern.matches("[a-zA-Z]+", id) == true || id.length() != 9)
+                   eTid.setError("invalid id");
+                if (((!email.endsWith(".com")) || (!email.endsWith(".il"))) && (email.indexOf("@") == (-1)))
+                  eTemail.setError("invalid e-mail");
+
 
                 if (!phone.startsWith("+972")) phone = "+972" + phone;
 
                 logoption();
 
-        }}}
+            }
+        }}
+
 
 
     /**
      * this function is called when the user wants to login.
      * the function sends sms to his phone number with a verification code.
      *
-     * @param	phoneNumber the phone number of the user. The SMS is sent to this phone number.
+     * @param    phoneNumber the phone number of the user. The SMS is sent to this phone number.
      */
 
     private void startPhoneNumberVerification(String phoneNumber) {
@@ -320,8 +294,9 @@ public class auth extends AppCompatActivity {
     /**
      * this function is called to check if the code the user wrote is the code he received and create a credential.
      * if he wrote a right code, "signInWithPhoneAuthCredential" function is called.
-     * @param	code the code that the
+     *
      * @param verificationId a verification identity to connect with firebase servers.
+     * @param    code the code that the
      */
     private void verifyPhoneNumberWithCode(String verificationId, String code) {
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
@@ -332,9 +307,10 @@ public class auth extends AppCompatActivity {
     /**
      * this function is called to sign in the user.
      * saving  SharedPreferences- stayConnect,firstRun,coach according to user.
-
+     * <p>
      * if the credential is proper the user is signs in and he sent to the next activity, depends on his status (coach or player)
-     * @param	credential a credential that everything was right and he can sign in.
+     *
+     * @param    credential a credential that everything was right and he can sign in.
      */
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
         refAuth.signInWithCredential(credential)
@@ -352,19 +328,17 @@ public class auth extends AppCompatActivity {
 
                             FirebaseUser user = refAuth.getCurrentUser();
                             uid = user.getUid();
-                           if (!isUID){
-                              // SharedPreferences settings1=getSharedPreferences("PREFS_NAME",MODE_PRIVATE);
-                              // Boolean isCoach =settings1.getBoolean("coach",false);
-                             //  if (isCoach)
-                             User userdb = new User(name,phone,uid,id,coach,email,birthday);
-                            refUsers.child(name).setValue(userdb);
+                            if (!isUID) {
+                                // SharedPreferences settings1=getSharedPreferences("PREFS_NAME",MODE_PRIVATE);
+                                // Boolean isCoach =settings1.getBoolean("coach",false);
+                                //  if (isCoach)
+                                User userdb = new User(name, phone, uid, id, coach, email, birthday);
+                                refUsers.child(name).setValue(userdb);
                                 //else
-                                   // refUsers.child("Player").child(name).child("uid").setValue(uid);
-                           }
+                                // refUsers.child("Player").child(name).child("uid").setValue(uid);
+                            }
                             setUsersListener();
-                        }
-
-                        else {
+                        } else {
                             Log.d(TAG, "signInWithCredential:failure", task.getException());
                             Toast.makeText(auth.this, "wrong!", Toast.LENGTH_LONG).show();
                         }
@@ -415,14 +389,13 @@ public class auth extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    if (user.getUid().equals(data.getValue(User.class).getUid())){
-                        currentUser=data.getValue(User.class);
-                        if (currentUser.getCoach()){
+                    if (user.getUid().equals(data.getValue(User.class).getUid())) {
+                        currentUser = data.getValue(User.class);
+                        if (currentUser.getCoach()) {
                             Intent si = new Intent(auth.this, Coachmain.class);
                             startActivity(si);
                             finish();
-                        }
-                        else {
+                        } else {
                             Intent si = new Intent(auth.this, playermain.class);
                             startActivity(si);
                             finish();
@@ -430,6 +403,7 @@ public class auth extends AppCompatActivity {
                     }
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
@@ -437,6 +411,4 @@ public class auth extends AppCompatActivity {
         refUsers.addValueEventListener(usersListener);
         //refUsers.child("Player").addValueEventListener(usersListener);
     }
-
-
 }

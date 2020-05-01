@@ -33,6 +33,12 @@ public class listofteams extends AppCompatActivity implements AdapterView.OnItem
     String co,str;
     AlertDialog.Builder ad;
     LinearLayout dialog;
+
+    /**
+     * intent with name
+     * create list
+     * @return list with teams
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +51,6 @@ public class listofteams extends AppCompatActivity implements AdapterView.OnItem
         co=cName;
         list1.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         list1.setOnItemClickListener(this);
-        Toast.makeText(listofteams.this, cName, Toast.LENGTH_LONG).show();
 
         refTeams.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -69,6 +74,11 @@ public class listofteams extends AppCompatActivity implements AdapterView.OnItem
 
     }
 
+    /**
+     * on click team
+     * setting list of players
+     * @param view
+     */
     public void choose(View view) {
 
         Toast.makeText(listofteams.this, String.valueOf(sp.getSelectedItem()), Toast.LENGTH_LONG).show();
@@ -92,6 +102,12 @@ public class listofteams extends AppCompatActivity implements AdapterView.OnItem
         });
     }
 
+    /**
+     * alert dialog
+     * info,delete, ok
+
+     */
+
     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
         final View customLayout = getLayoutInflater().inflate(R.layout.dialogx, null);
@@ -100,13 +116,12 @@ public class listofteams extends AppCompatActivity implements AdapterView.OnItem
         TextView tv2 = customLayout.findViewById(R.id.tv2);
         str = pList.get(position);
         builder.setTitle(str);
-        //builder.setMessage(second +third + first);
+
         refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     User u = ds.getValue(User.class);
-                    //assert u != null;
                     if (str.equals(u.getName())) {
                         TextView tv=customLayout.findViewById(R.id.tv);
                         TextView tv2=customLayout.findViewById(R.id.tv2);
@@ -147,7 +162,7 @@ public class listofteams extends AppCompatActivity implements AdapterView.OnItem
         ad.setCancelable(false);
 
 
-        ad.setNeutralButton("exit", new DialogInterface.OnClickListener() {
+        ad.setNeutralButton("ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.cancel();
@@ -160,9 +175,14 @@ public class listofteams extends AppCompatActivity implements AdapterView.OnItem
 
     }
 
+    /**
+     * back to main
+
+     */
+
     public void back(View view) {
         Intent si = new Intent(listofteams.this, Coachmain.class);
-
         startActivity(si);
+        finish();
     }
 }

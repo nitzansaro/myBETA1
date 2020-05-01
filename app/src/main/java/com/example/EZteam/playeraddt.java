@@ -25,16 +25,17 @@ public class playeraddt extends AppCompatActivity {
     Boolean teamEX=true;
 
     ArrayList<String> playerslist1  = new ArrayList <> ();
-    ArrayList <String> nitzan = new ArrayList<>();
+
 
     Team teamt;
-    int numberofchildinlist=1;
 
+    /**
+     *on getting name from main, only gets here if has no team.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playeraddt);
-
         name = findViewById(R.id.name);
         number = findViewById(R.id.number);
         Intent t=getIntent();
@@ -42,6 +43,11 @@ public class playeraddt extends AppCompatActivity {
 
 
         }
+
+    /**
+     * on click for check team
+     * @param view
+     */
 
     public void submit(View view) {
         name1 = name.getText().toString();
@@ -53,6 +59,11 @@ public class playeraddt extends AppCompatActivity {
 
         }
 
+    /**
+     * if exists team can be added
+     * add player name into players list.
+     * update team
+     */
     ValueEventListener VEL = new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

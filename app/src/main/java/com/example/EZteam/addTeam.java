@@ -41,6 +41,10 @@ public class addTeam extends AppCompatActivity {
 
     }
 
+    /**
+     * if found not good
+     */
+
     com.google.firebase.database.ValueEventListener VEL = new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -53,6 +57,13 @@ public class addTeam extends AppCompatActivity {
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) { }
     };
+
+    /**
+     * on click
+     *
+     * @param view team exist - cant add
+     *             else new team
+     */
 
     public void submit(View view) {
         playlist.clear();

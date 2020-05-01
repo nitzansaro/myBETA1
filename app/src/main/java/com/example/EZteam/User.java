@@ -4,6 +4,12 @@ class User {
     private String name, phone, uid, id,email,dayofbirth;
     private Boolean coach=false;
 
+    /**
+     * @author		Nitzan Saroudi <nitzan2892002@gmail.com>
+     * @since		28/12/2019
+     * class for the users.
+     */
+
 
     public User() {
     }

@@ -12,6 +12,10 @@ public class credits extends AppCompatActivity {
     Timer timer;
     String c;
 
+    /**
+     *coach/player
+     * timer
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +32,7 @@ public class credits extends AppCompatActivity {
                 else {Intent t = new Intent (credits.this, playermain.class);
                     startActivity(t);}
                 finish(); }
-        },   5000);
+        },   3000);
     }
     }
 

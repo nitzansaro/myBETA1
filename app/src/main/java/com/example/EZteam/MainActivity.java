@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -11,8 +12,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static int SPLASH_TIME_OUT=4000;
     private FirebaseAuth mAuth;
    Timer timer;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,22 +25,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
-
-}
-    @Override
-    public void onStart() {
-        super.onStart();
-
-       timer=new Timer();
-        timer.schedule(new TimerTask() {
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent t = new Intent (MainActivity.this, auth.class);
-                  startActivity(t);
-                  finish(); }
-        },   2000);}
+                Intent t = new Intent(MainActivity.this, auth.class);
+                startActivity(t);
+                finish();
+            }
+        } ,SPLASH_TIME_OUT);
 
-}
+
+};}
 
 
 

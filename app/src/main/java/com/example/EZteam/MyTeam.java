@@ -29,7 +29,12 @@ public class MyTeam extends AppCompatActivity implements AdapterView.OnItemClick
 
     ArrayList<String> pList = new ArrayList<>();
 
-
+    /**
+     *create list view for players
+     * cheking if has team- if not send into player add team
+     * data looking for the team of player
+     * adding into list view
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +75,10 @@ public class MyTeam extends AppCompatActivity implements AdapterView.OnItemClick
 
     }
 
+    /**
+     *on click data looking for user in team, if found alert dialog showing info
+     */
+
     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
         final View customLayout = getLayoutInflater().inflate(R.layout.dialogx, null);
@@ -78,36 +87,24 @@ public class MyTeam extends AppCompatActivity implements AdapterView.OnItemClick
         TextView tv2 = customLayout.findViewById(R.id.tv2);
         str = pList.get(position);
         builder.setTitle(str);
-        //builder.setMessage(second +third + first);
         refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     User u = ds.getValue(User.class);
-                    //assert u != null;
                     if (str.equals(u.getName())) {
                         TextView tv=customLayout.findViewById(R.id.tv);
                         TextView tv2=customLayout.findViewById(R.id.tv2);
                         tv.setText("email: " +u.getEmail() + " id: " + u.getid());
                         tv2.setText("phone num: " +u.getPhone() + " d.o.b: " + u.getDayofbirth());
-
-                    }
-                }
-
-            }
+                    } } }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
-
-
-
-
         builder.setCancelable(false);
-
-
         builder.setNeutralButton("exit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -116,13 +113,15 @@ public class MyTeam extends AppCompatActivity implements AdapterView.OnItemClick
         });
         AlertDialog adb = builder.create();
         adb.show();
-
-
-
     }
+
+    /**
+     * back to main
+     */
 
     public void back(View view) {
         Intent si = new Intent(MyTeam.this, playermain.class);
         startActivity(si);
+        finish();
     }
 }

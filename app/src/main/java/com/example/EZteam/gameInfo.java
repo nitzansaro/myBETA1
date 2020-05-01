@@ -58,7 +58,11 @@ public class gameInfo extends AppCompatActivity {
     BroadcastG broadcastg;
     String thisdate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
-
+    /**
+     * dialog picker date of the game
+     * database check teams of coach into spinner, category spinner.
+     * @param savedInstanceState
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +101,7 @@ public class gameInfo extends AppCompatActivity {
 
        Intent i=getIntent();
         co=i.getStringExtra("n");
-        mAuth = FirebaseAuth.getInstance();
+       // mAuth = FirebaseAuth.getInstance();
 
 
         place = findViewById(R.id.place);
@@ -106,7 +110,7 @@ public class gameInfo extends AppCompatActivity {
         time = findViewById(R.id.time);
         category  = findViewById(R.id.catagory);
 
-
+/*
         refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -119,7 +123,7 @@ public class gameInfo extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
         refTeams.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -152,7 +156,7 @@ public class gameInfo extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        registerReceiver(broadcastg,new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        //registerReceiver(broadcastg,new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         }
 
 
@@ -169,6 +173,11 @@ public class gameInfo extends AppCompatActivity {
 
     }
 
+    /**
+     * on click, new game into data
+     * @param view
+     */
+
 
     public void next(View view) {
 
@@ -180,7 +189,7 @@ public class gameInfo extends AppCompatActivity {
         time.getText().toString();
         Game game=new Game(t1,t2,p1,c1,time.getText().toString(),date1);
         refGame.child(date).setValue(game);
-
+/*
         SharedPreferences settings=getSharedPreferences("PREFS_NAME",MODE_PRIVATE);
         SharedPreferences.Editor editor=settings.edit();
         editor.putString("thisday",thisdate);
@@ -189,11 +198,14 @@ public class gameInfo extends AppCompatActivity {
         editor.putString("team2",t2);
         editor.putString("time",time.getText().toString());
         editor.commit();
-        moveTaskToBack(true);
+        moveTaskToBack(true);*/
         Intent si = new Intent(gameInfo.this,Coachmain.class);
         startActivity(si);}
 
 
+    /**
+     * making sure user wnt out
+     */
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)
@@ -212,6 +224,6 @@ public class gameInfo extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        unregisterReceiver(broadcastg);
+        //unregisterReceiver(broadcastg);
     }
 }

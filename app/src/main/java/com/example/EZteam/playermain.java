@@ -39,13 +39,18 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
     ArrayList<String> gList = new ArrayList<>();
     ArrayList<String> mList = new ArrayList<>();
     FirebaseUser user = refAuth.getCurrentUser();
-    String uid, email = user.getEmail(),str;
+    String uid, phone,str,str1;
     ListView lv, lvmsg;
     TextView tv, tv2;
     Team t;
     AlertDialog.Builder ad;
     TextView tv1, tv3;
     User p;
+
+    /**
+     * creating list view for msg and games.
+     * @param savedInstanceState
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,12 +70,11 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
         lvmsg.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         lvmsg.setOnItemClickListener(this);
 
-
-
-
     }
 
-
+    /**
+     * finding corrent user
+     */
     @Override
     public void onStart() {
         super.onStart();
@@ -81,9 +85,13 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
                 .equalTo(uid)
                 .limitToFirst(1);
         query.addListenerForSingleValueEvent(VEL1);
-        email = user.getEmail();
+        phone= user.getPhoneNumber();
         uid = user.getUid();
     }
+
+    /**
+     * once user found, name updated
+     */
 
     com.google.firebase.database.ValueEventListener VEL1 = new ValueEventListener() {
         @Override
@@ -96,6 +104,9 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
                     p = data.getValue(User.class);
 
                     tv.setText("Hello " + playerName + "!");
+                    /**
+                     * finding the player team, by going trough all the team list of player/
+                     */
 
                     refTeams.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -112,16 +123,22 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
                                     }
                                     i--;
                                 }
-
+                                /**
+                                 * find if this team has a msg- show
+                                 */
                                 tv2.setText(tname + "'s upcoming games");
+                                if (tname.equals(" "))
+                                {Intent si = new Intent(playermain.this,MyTeam.class);
+                                    si.putExtra("name",playerName);
+                                    startActivity(si);}
+
                                 refMsg.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         mList.clear();
                                         for(DataSnapshot data : dataSnapshot.getChildren()){
                                             Messages m = data.getValue(Messages.class);
-                                            //waitValues.add(user);
-                                            if (m.getClient().equals(tname))
+                                            if (m.getPLayer_msg().equals(tname))
                                                 mList.add(m.getMsg());
 
                                         }
@@ -134,6 +151,10 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
 
                                     }
                                 });
+                                /**
+                                 * has games?
+                                 * - into list view title is the enemy/
+                                 */
 
                                 refGame.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
@@ -170,6 +191,9 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
         }
     };
 
+    /**
+     *msg- showing the messege can delete and ok.
+     */
 
     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
         switch (parent.getId()) {
@@ -179,17 +203,11 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
                 builder.setView(customLayout);
                 TextView tv1 = customLayout.findViewById(R.id.tv);
                 TextView tv2 = customLayout.findViewById(R.id.tv2);
+                str1 = mList.get(position);
+                builder.setTitle("Message from your coach");
+                builder.setMessage(str1);
 
-                //dialog = (LinearLayout) getLayoutInflater().inflate(R.layout.dialogx, null);
-                //ad = new AlertDialog.Builder(this);
-                //.setCancelable(false);
-                //ad.setView(dialog);
-                //final String
-                str = mList.get(position);
-                builder.setTitle("Message from your trainer");
-                builder.setMessage(str);
-
-
+/*
                 builder.setPositiveButton("Delete Message", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(final DialogInterface dialogInterface, int i) {
@@ -197,9 +215,9 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
                         recreate();
                         dialogInterface.cancel();
                     }
-                });
+                });*/
 
-                builder.setNeutralButton("cancel", new DialogInterface.OnClickListener() {
+                builder.setNeutralButton("ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterfac, int i) {
                         dialogInterfac.cancel();
@@ -210,6 +228,11 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
                 adb.show();
 
                 break;
+            /**
+             * case because if this is what the user choose
+             * alert for game informetion
+             * can only read
+             */
 
             case R.id.lv:
                 final android.app.AlertDialog.Builder builder2 = new android.app.AlertDialog.Builder(this);
@@ -229,10 +252,11 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
                         for (DataSnapshot data : dataSnapshot.getChildren()) {
                             Game g = data.getValue(Game.class);
                             if (g.getTeamName2().equals(str)) {
-                                tv3.setText("A " + g.getCategory() + " game versus " + str);
+                                tv3.setText("A " + g.getCategory() + " game versus " + g.getTeamName2());
                                 tv3.setText(g.getTime() + " " + g.getDate() + " at " + g.getPlace());
                                 Toast.makeText(playermain.this, g.getTeamName2() + g.getPlace(), Toast.LENGTH_LONG).show();
                             }
+                            
                         }
                     }
 
@@ -256,10 +280,9 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
     }
 
 
-
-
-
-
+    /**
+     * move to watch team list
+     */
 
     public void toTeam(View view) {
         Intent si = new Intent(playermain.this,MyTeam.class);
@@ -268,7 +291,10 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
         startActivity(si);
     }
 
-
+    /**
+     *new menu
+     * @see Coachmain
+     */
 
     public boolean onCreateOptionsMenu (Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -295,7 +321,9 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
             si.putExtra("n",p.getName());
             si.putExtra("p",p.getPhone());
             si.putExtra("i",p.getid());
-            si.putExtra("c","player");
+
+           si.putExtra("d",p.getDayofbirth());
+           si.putExtra("c","player");
             startActivity(si);
         }
 

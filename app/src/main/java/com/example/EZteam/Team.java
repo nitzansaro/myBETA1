@@ -2,11 +2,18 @@ package com.example.EZteam;
 
 import java.util.ArrayList;
 
+
 public class Team {
     public String teamnum;
     public String teamname;
     public String coachname;
     public  ArrayList<String> Plist  = new ArrayList  ();
+
+    /**
+     * @author		Nitzan Saroudi <nitzan2892002@gmail.com>
+     * @since		4/1/2020
+     * class for the teams.
+     */
 
 
     public Team(){}

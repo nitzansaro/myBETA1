@@ -16,9 +16,11 @@ public class profile extends AppCompatActivity {
     FirebaseUser user = refAuth.getCurrentUser();
     String uid = user.getUid();
     String email=user.getEmail();
-    String n,p1,i,c;
+    String n,p1,i,c,d;
 
-
+    /**
+     *getting info from activity
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +30,7 @@ public class profile extends AppCompatActivity {
         tVemailview = (TextView) findViewById(R.id.tVemailview);
         tVidview = (TextView) findViewById(R.id.tVidview);
         tVphoneview = (TextView) findViewById(R.id.tVphoneview);
-        //tVcoachview = (TextView) findViewById(R.id.tVcoachview);
-        cBconnectview = (CheckBox) findViewById(R.id.cBconnectview);
+          cBconnectview = (CheckBox) findViewById(R.id.cBconnectview);
         t=findViewById(R.id.titl);
 
         Intent ins=getIntent();
@@ -37,6 +38,7 @@ public class profile extends AppCompatActivity {
         p1=ins.getStringExtra("p");
         i=ins.getStringExtra("i");
         c=ins.getStringExtra("c");
+        d=ins.getStringExtra("d");
         tVemailview.setText(email);
         tVnameview.setText(n);
         tVidview.setText(i);
@@ -55,6 +57,10 @@ public class profile extends AppCompatActivity {
         return true;
     }
 
+    /**
+     *
+     */
+
     public boolean onOptionsItemSelected (MenuItem item) {
         int id=item.getItemId();
         if (id==R.id.menuCredits) {
@@ -67,11 +73,15 @@ public class profile extends AppCompatActivity {
             si.putExtra("n",n);
             si.putExtra("p",p1);
             si.putExtra("i",i);
+            si.putExtra("d",d);
             if (c.equals("Player")){
                si.putExtra("cOp","player");}
             else { si.putExtra("cOp","coach");}
             startActivity(si);
         }
+        /**
+         * if user want to get out based on saty connected
+         */
 
         if (id==R.id.menuout) {
             FirebaseUser user = refAuth.getCurrentUser();
