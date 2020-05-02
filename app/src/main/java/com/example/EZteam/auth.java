@@ -60,6 +60,7 @@ public class auth extends AppCompatActivity {
     Button btn;
     Switch pOrc;
     Boolean coach;
+    Boolean c=true;
 
     String name, phone, email, password, uid,id,birthday;
     User userdb;
@@ -250,38 +251,29 @@ public class auth extends AppCompatActivity {
                                 Log.d("Main2Activity", "signinUserWithEmail:success");
                                 Toast.makeText(auth.this, "Login Success", Toast.LENGTH_LONG).show();
 
-                              /*  Boolean c = settings.getBoolean("coach",false);
-
-
-                                if (c){
-                                    Intent si = new Intent(auth.this, Coachmain.class);
-                                    si.putExtra("name",name);
-                                    startActivity(si);
-                                }
-                                else{
-                                    Intent si = new Intent(auth.this, playermain.class);
-                                    si.putExtra("name",name);
-                                    startActivity(si);}*/
-                                refUsers.child("Coach").addListenerForSingleValueEvent(new ValueEventListener() {
+                                refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         for (DataSnapshot ds : dataSnapshot.getChildren()) {
                                             User u = ds.getValue(User.class);
-                                            if (u.getCoach()&&email.equals(u.getEmail())) {
-                                               Boolean c = u.getCoach();
+                                            if (email.equals(u.getEmail())) {
+
+                                                if (u.getCoach()) {
                                                     Intent si = new Intent(auth.this, Coachmain.class);
                                                     si.putExtra("name", name);
                                                     startActivity(si);
-                                            } else {
-                                                if (email.equals(u.getEmail())){
-                                                    Intent si = new Intent(auth.this, Coachmain.class);
-                                                    si.putExtra("name", name);
-                                                    startActivity(si); } } }
+                                                } else {
 
-                                    }
+                                                    Intent si = new Intent(auth.this, playermain.class);
+                                                    si.putExtra("name", name);
+                                                    startActivity(si);
+                                                }}}
+                                            }
+
 
                                     @Override
                                     public void onCancelled(@NonNull DatabaseError databaseError) {
+
                                     }
                                 });
 
@@ -344,7 +336,7 @@ public class auth extends AppCompatActivity {
                                 userdb = new User(name, phone, uid, id,coach, email,birthday);
 
                                 if (coach) {
-                                    refUsers.child("Coach").child(name).setValue(userdb);
+                                    refUsers.child(name).setValue(userdb);
                                     Toast.makeText(auth.this, "Successful registration", Toast.LENGTH_LONG).show();
 
                                     Intent si = new Intent(auth.this, addTeam.class);
@@ -352,7 +344,7 @@ public class auth extends AppCompatActivity {
                                     si.putExtra("name",name);
                                     startActivity(si);
                                 } else {
-                                    refUsers.child("Player").child(name).setValue(userdb);
+                                    refUsers.child(name).setValue(userdb);
                                     Toast.makeText(auth.this, "Successful registration", Toast.LENGTH_LONG).show();
                                     Intent si = new Intent(auth.this, playeraddt.class);
                                     si.putExtra("name",name);
