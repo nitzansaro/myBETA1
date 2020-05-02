@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -51,6 +53,8 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
     Game g = new Game();
     AlertDialog.Builder add;
     LinearLayout dialog;
+    BroadcastG broadcastg;
+
     /**
      * creating list view for msg and games.
      * @param savedInstanceState
@@ -59,6 +63,8 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        broadcastg = new BroadcastG();
+
         setContentView(R.layout.playermain);
         addgame = findViewById(R.id.addgame);
         addteam = findViewById(R.id.addteam);
@@ -89,8 +95,15 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
                 .equalTo(uid)
                 .limitToFirst(1);
         query.addListenerForSingleValueEvent(VEL1);
+        registerReceiver(broadcastg,new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         phone= user.getPhoneNumber();
         uid = user.getUid();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(broadcastg);
     }
 
     /**
@@ -146,6 +159,8 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
                                                 mList.add(m.getMsg());
 
 
+
+
                                         }
                                         ArrayAdapter adp = new ArrayAdapter<String>(playermain.this,R.layout.support_simple_spinner_dropdown_item, mList);
                                         lvmsg.setAdapter(adp);
@@ -169,6 +184,8 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
                                             Game g = data.getValue(Game.class);
                                             if (g.getTeamName().equals(tname))
                                                 gList.add(g.getTeamName2());
+
+
 
 
                                         }
@@ -337,5 +354,22 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
     }
 
 
+    public void noti(View view) {
+        if (!gList.isEmpty())
+        {
+            int i=gList.size();
+            String s=String.valueOf(i);
 
+            SharedPreferences settings=getSharedPreferences("PREFS_NAME",MODE_PRIVATE);
+            SharedPreferences.Editor editor=settings.edit();
+            editor.putString("gamesoon",s);
+            editor.commit();
+             moveTaskToBack(true);}
+        else
+        {
+            Toast.makeText(playermain.this,"there is no game soon", Toast.LENGTH_LONG).show();
+            moveTaskToBack(false);
+
+        }
+    }
 }

@@ -13,7 +13,7 @@ public class credits extends AppCompatActivity {
     String c;
 
     /**
-     *coach/player
+
      * timer
      */
     @Override
@@ -26,12 +26,7 @@ public class credits extends AppCompatActivity {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                /*if(c.equals("coach")){
-                Intent t = new Intent (credits.this,Coachmain.class);
-                startActivity(t);}
-                else {Intent t = new Intent (credits.this, playermain.class);
-                    startActivity(t);}
-                 */
+
                 finish();
             }
         },   3000);

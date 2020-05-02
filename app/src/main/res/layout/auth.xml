@@ -95,23 +95,18 @@
             android:id="@+id/eTemail"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.3"
+            android:layout_weight="1.6"
             android:ems="9"
             android:hint="mail"
             android:inputType="textEmailAddress"
             android:textColorHint="#FF9800"
             android:visibility="visible" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5" />
-
         <EditText
             android:id="@+id/eTpass"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.3"
+            android:layout_weight="1.6"
             android:ems="9"
             android:hint="password"
             android:inputType="textPassword"

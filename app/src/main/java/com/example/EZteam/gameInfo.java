@@ -56,7 +56,6 @@ public class gameInfo extends AppCompatActivity {
     TextView mDisplayDate;
     private static final String TAG = "gameinfo";
     DatePickerDialog.OnDateSetListener mDateSetListener;
-    BroadcastG broadcastg;
 
 
 
@@ -70,7 +69,7 @@ public class gameInfo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_info);
-        broadcastg = new BroadcastG();
+
 
         mDisplayDate=(TextView)findViewById(R.id.tvdate);
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
@@ -143,7 +142,7 @@ public class gameInfo extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        //registerReceiver(broadcastg,new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+
         }
 
 
@@ -198,10 +197,5 @@ public class gameInfo extends AppCompatActivity {
                 }).create().show();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
 
-        //unregisterReceiver(broadcastg);
-    }
 }

@@ -70,13 +70,18 @@ public class playeraddt extends AppCompatActivity {
             if (dataSnapshot.exists()) {
                 for(DataSnapshot data : dataSnapshot.getChildren()) {
                     teamt = data.getValue(Team.class);
+                    if (teamt.getTeamnum().equals(number1)){
                     playerslist1 = teamt.getPlayerslist();
                     playerslist1.add( Nplayer);
                     teamt.setPlayerslist(playerslist1);
                     refTeams.child(name1).setValue(teamt);
-                    Intent a2 = new Intent(playeraddt.this, auth.class);
-                    startActivity(a2);
-                    //finish();
+                    Intent a2 = new Intent(playeraddt.this, playermain.class);
+                    startActivity(a2);}
+                    else{
+                        Toast.makeText(playeraddt.this, "Team number is wrong", Toast.LENGTH_LONG).show();
+
+                    }
+
                 }
             }
             else {

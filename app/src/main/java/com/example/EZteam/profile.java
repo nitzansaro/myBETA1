@@ -5,9 +5,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
 import static com.example.EZteam.FBref.refAuth;
 
 public class profile extends AppCompatActivity {
@@ -17,6 +22,7 @@ public class profile extends AppCompatActivity {
     String uid = user.getUid();
     String email=user.getEmail();
     String n,p1,i,c,d;
+    Timer timer;
 
     /**
      *getting info from activity
@@ -48,61 +54,35 @@ public class profile extends AppCompatActivity {
         Boolean isChecked=settings.getBoolean("stayConnect",false);
         cBconnectview.setChecked(isChecked);
 
-    }
 
+        timer=new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
 
-
-    public boolean onCreateOptionsMenu (Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    /**
-     *
-     */
-
-    public boolean onOptionsItemSelected (MenuItem item) {
-        int id=item.getItemId();
-        if (id==R.id.menuCredits) {
-            Intent si = new Intent(profile.this, credits.class);
-            startActivity(si);
-        }
-        if (id==R.id.menuProfile) {
-
-            Intent si = new Intent(profile.this, profile.class);
-            si.putExtra("n",n);
-            si.putExtra("p",p1);
-            si.putExtra("i",i);
-            si.putExtra("d",d);
-            if (c.equals("Player")){
-               si.putExtra("cOp","player");}
-            else { si.putExtra("cOp","coach");}
-            startActivity(si);
-        }
-        /**
-         * if user want to get out based on saty connected
-         */
-
-        if (id==R.id.menuout) {
-            FirebaseUser user = refAuth.getCurrentUser();
-            if (!cBconnectview.isChecked()){
-                refAuth.signOut();
+                finish();
             }
-            SharedPreferences settings=getSharedPreferences("PREFS_NAME1",MODE_PRIVATE);
-            SharedPreferences.Editor editor=settings.edit();
-            editor.putBoolean("stayConnect",cBconnectview.isChecked());
-            editor.apply(); //changed from commit
-            finish();
-            Intent si = new Intent(profile.this, MainActivity.class);
-            startActivity(si);
+        },   10000);
 
+    }
+
+
+
+
+    public void update(View view) {
+
+        FirebaseUser user = refAuth.getCurrentUser();
+        if (!cBconnectview.isChecked()){
+            refAuth.signOut();
         }
+        SharedPreferences settings=getSharedPreferences("PREFS_NAME1",MODE_PRIVATE);
+        SharedPreferences.Editor editor=settings.edit();
+        editor.putBoolean("stayConnect",cBconnectview.isChecked());
+        editor.apply(); //changed from commit
+        Intent si = new Intent(profile.this, MainActivity.class);
+        startActivity(si);
 
-        if (id==R.id.menuMain) {
-            finish();;
 
-        }
 
-        return true;
     }
 }

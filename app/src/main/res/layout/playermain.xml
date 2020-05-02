@@ -112,6 +112,16 @@
             android:text="My team"
             android:textColor="#F0F1F6"
             android:textSize="20sp" />
+        <Button
+            android:id="@+id/noti"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:background="#7C0A1C7E"
+            android:onClick="noti"
+            android:text="set notification"
+            android:textColor="#F0F1F6"
+            android:textSize="20sp" />
 
 
 

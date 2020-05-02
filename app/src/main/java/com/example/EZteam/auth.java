@@ -266,22 +266,31 @@ public class auth extends AppCompatActivity {
                     });
         } else {
             name = eTname.getText().toString();
-            if (name.isEmpty()) eTname.setError("you must enter your name");
             phone = eTphone.getText().toString();
             if (phone.isEmpty()) eTphone.setError("you must enter a phone number");
-            if ((phone.length() != 10) || (!phone.substring(0, 2).equals("05")) || Pattern.matches("[a-zA-Z]+", phone) == true)
-                eTphone.setError("invalid phone number");
             id = eTid.getText().toString();
+            if (name.isEmpty()) eTname.setError("you must enter your name");
             if (id.isEmpty()) eTid.setError("you must enter your id");
-            if (Pattern.matches("[a-zA-Z]+", id) == true || id.length() != 9)
-                eTid.setError("invalid id");
             if (pOrc.isChecked())
                 coach = true;
             else {
                 coach= false; }
-            if (birthday.isEmpty()) tVb.setError("you must enter your birth day");
-            if (((!email.endsWith(".com")) || (!email.endsWith(".il"))) && (email.indexOf("@") == (-1)))
-                eTemail.setError("invalid e-mail");
+            if ((!name.isEmpty()) && (!email.isEmpty()) &&(!birthday.isEmpty())&&
+                    (!phone.isEmpty()) && (!id.isEmpty()) ) {
+                if (((!email.endsWith(".com")) || (!email.endsWith(".il"))) && (email.indexOf("@") == (-1)))
+                   eTemail.setError("invalid e-mail");
+                else
+                          if (birthday.isEmpty()) tVb.setError("you must enter your birth day");
+                          else
+                                  if (Pattern.matches("[a-zA-Z]+", id) == true || id.length() != 9)
+                                        eTid.setError("invalid id");
+                                  else
+                                      if ((phone.length() != 10) || (!phone.substring(0, 2).equals("05")) || Pattern.matches("[a-zA-Z]+", phone) == true)
+                                                eTphone.setError("invalid phone number");
+           }
+
+
+
 
 
 
