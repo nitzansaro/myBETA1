@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -269,8 +268,8 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
                             Game gg = data.getValue(Game.class);
                             if (gg.getTeamName2().equals(str)) {
                                 Toast.makeText(playermain.this, gg.getCategory() + "      at " + gg.getTime() + " " + gg.getDate() + " at " + gg.getPlace(), Toast.LENGTH_LONG).show();
-                                TextView game1 = customLayout2.findViewById(R.id.game1);
-                                TextView game2 = customLayout2.findViewById(R.id.game2);
+                                TextView game1 = customLayout2.findViewById(R.id.part1);
+                                TextView game2 = customLayout2.findViewById(R.id.part2);
 
 
                                 game1.setText("A " + gg.getCategory() + " game versus " + gg.getTeamName2());

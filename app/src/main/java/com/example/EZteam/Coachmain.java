@@ -165,9 +165,9 @@ public class Coachmain extends AppCompatActivity implements AdapterView.OnItemCl
     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
         LayoutInflater inflater = getLayoutInflater();
-        View alertLayout = inflater.inflate(R.layout.dialogx, null);
-        tv1 = alertLayout.findViewById(R.id.game1);
-        tv3 = alertLayout.findViewById(R.id.game2);
+        View alertLayout = inflater.inflate(R.layout.dialog_player, null);
+        tv1 = alertLayout.findViewById(R.id.part1);
+        tv3 = alertLayout.findViewById(R.id.part2);
         final String str= gList.get(position);
         ad = new AlertDialog.Builder(this);
 
@@ -183,7 +183,7 @@ public class Coachmain extends AppCompatActivity implements AdapterView.OnItemCl
                         tv1.setText("A " + g.getCategory() + " game versus " + g.getTeamName2());
                         tv3.setText(g.getTime() + " " + g.getDate() + " at " + g.getPlace());
                         ad.setTitle(g.getTeamName());
-                        Toast.makeText(Coachmain.this, g.getTeamName2() + g.getPlace(), Toast.LENGTH_LONG).show();
+
                     }}
             }
 
@@ -224,12 +224,10 @@ public class Coachmain extends AppCompatActivity implements AdapterView.OnItemCl
 
     public void newmsg(View view) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
-
-
         final View customLayout = getLayoutInflater().inflate(R.layout.dialogx, null);
         builder.setView(customLayout);
-        TextView tv=customLayout.findViewById(R.id.game1);
-        TextView tv2=customLayout.findViewById(R.id.game2);
+        TextView tv=customLayout.findViewById(R.id.part1);
+        TextView tv2=customLayout.findViewById(R.id.part2);
         EditText edmsg = customLayout.findViewById(R.id.edmsg);
 
         tv.setVisibility(View.INVISIBLE);
@@ -304,8 +302,8 @@ public class Coachmain extends AppCompatActivity implements AdapterView.OnItemCl
             }
         });
 
-        android.app.AlertDialog adb = builder.create();
-        adb.show();
+        android.app.AlertDialog ad_msg = builder.create();
+        ad_msg.show();
     }
 
 

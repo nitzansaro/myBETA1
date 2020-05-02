@@ -45,9 +45,10 @@ class BroadcastG extends BroadcastReceiver {
 
         if (!gamesoon.equals("-1")){
             if (thisday.equals(firstgame)){
-                st="you have  a game today good luck!";
-            }else {
-            st="you have "+ gamesoon +"  games soon good luck!";}
+                st="you have a game today!!";
+
+           // st="you have "+ gamesoon +"  games soon good luck!";
+
             NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             NotificationCompat.Builder myNoti = new NotificationCompat.Builder(context.getApplicationContext(), "my_notify");
             Intent tmpInt = new Intent(context.getApplicationContext(), BroadcastG.class);
@@ -76,8 +77,9 @@ class BroadcastG extends BroadcastReceiver {
             nm.notify(0, myNoti.build());
 
 
-        }
+        }}}}
 
 
 
-    }}
+
+

@@ -12,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -81,19 +80,19 @@ public class MyTeam extends AppCompatActivity implements AdapterView.OnItemClick
 
     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
-        final View customLayout = getLayoutInflater().inflate(R.layout.dialog_player, null);
+        final View customLayout = getLayoutInflater().inflate(R.layout.info_dialog, null);
         builder.setView(customLayout);
 
-        str = pList.get(position);
-        builder.setTitle(str);
+        //str = pList.get(position);
+       // builder.setTitle(str);
         refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     User u = ds.getValue(User.class);
                     if (str.equals(u.getName())) {
-                        TextView tv1 = customLayout.findViewById(R.id.game1);
-                        TextView tv2 = customLayout.findViewById(R.id.game2);
+                        TextView tv1 = customLayout.findViewById(R.id.part1);
+                        TextView tv2 = customLayout.findViewById(R.id.part2);
                         tv1.setText("email: " +u.getEmail() + " id: " + u.getid());
                         tv2.setText("phone num: " +u.getPhone() + " d.o.b: " + u.getDayofbirth());
                     } } }

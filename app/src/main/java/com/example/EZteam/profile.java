@@ -79,8 +79,7 @@ public class profile extends AppCompatActivity {
         SharedPreferences.Editor editor=settings.edit();
         editor.putBoolean("stayConnect",cBconnectview.isChecked());
         editor.apply(); //changed from commit
-        Intent si = new Intent(profile.this, MainActivity.class);
-        startActivity(si);
+       finish();
 
 
 

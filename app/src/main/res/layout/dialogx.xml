@@ -5,10 +5,32 @@
     android:orientation="vertical"
     android:padding="30dp">
 
+    <TextView
+        android:id="@+id/part1"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_weight="1"
+        android:textColor="#303F9F"
+
+        android:textSize="10dp" />
+
+
+    <TextView
+        android:id="@+id/part2"
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:layout_weight="1"
+
+
+        android:textColor="#1976D2"
+        android:textSize="10dp" />
+
+
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:visibility="invisible"
 
         android:id="@+id/msgspn"
         ></Spinner>
@@ -17,7 +39,10 @@
         android:layout_height="wrap_content"
         android:hint="write your message here"
         android:id="@+id/edmsg"
+        android:visibility="invisible"
         android:layout_weight="1"
 
         ></EditText>
+
+
 </LinearLayout>

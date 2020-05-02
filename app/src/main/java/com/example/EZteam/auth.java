@@ -38,6 +38,9 @@ import com.google.firebase.auth.AuthResult;
 
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 
 import java.util.Calendar;
@@ -246,7 +249,9 @@ public class auth extends AppCompatActivity {
                                 editor.apply(); //changed from commit
                                 Log.d("Main2Activity", "signinUserWithEmail:success");
                                 Toast.makeText(auth.this, "Login Success", Toast.LENGTH_LONG).show();
-                                Boolean c = settings.getBoolean("coach",false);
+
+                              /*  Boolean c = settings.getBoolean("coach",false);
+
 
                                 if (c){
                                     Intent si = new Intent(auth.this, Coachmain.class);
@@ -256,7 +261,30 @@ public class auth extends AppCompatActivity {
                                 else{
                                     Intent si = new Intent(auth.this, playermain.class);
                                     si.putExtra("name",name);
-                                    startActivity(si);}
+                                    startActivity(si);}*/
+                                refUsers.child("Coach").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                                            User u = ds.getValue(User.class);
+                                            if (u.getCoach()&&email.equals(u.getEmail())) {
+                                               Boolean c = u.getCoach();
+                                                    Intent si = new Intent(auth.this, Coachmain.class);
+                                                    si.putExtra("name", name);
+                                                    startActivity(si);
+                                            } else {
+                                                if (email.equals(u.getEmail())){
+                                                    Intent si = new Intent(auth.this, Coachmain.class);
+                                                    si.putExtra("name", name);
+                                                    startActivity(si); } } }
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    }
+                                });
+
 
                             } else {
                                 Log.d("Main2Activity", "signinUserWithEmail:fail");
@@ -271,22 +299,23 @@ public class auth extends AppCompatActivity {
             id = eTid.getText().toString();
             if (name.isEmpty()) eTname.setError("you must enter your name");
             if (id.isEmpty()) eTid.setError("you must enter your id");
+            if (birthday.isEmpty()) tVb.setError("you must enter your birth day");
             if (pOrc.isChecked())
                 coach = true;
-            else {
-                coach= false; }
+            else
+                coach= false;
             if ((!name.isEmpty()) && (!email.isEmpty()) &&(!birthday.isEmpty())&&
                     (!phone.isEmpty()) && (!id.isEmpty()) ) {
                 if (((!email.endsWith(".com")) || (!email.endsWith(".il"))) && (email.indexOf("@") == (-1)))
                    eTemail.setError("invalid e-mail");
-                          if (birthday.isEmpty()) tVb.setError("you must enter your birth day");
-                                  if (Pattern.matches("[a-zA-Z]+", id) == true || id.length() != 9)
+                else{
+                    if (Pattern.matches("[a-zA-Z]+", id) == true || id.length() != 9)
                                         eTid.setError("invalid id");
-                                      if ((phone.length() != 10) || (!phone.substring(0, 2).equals("05")) || Pattern.matches("[a-zA-Z]+", phone) == true)
+                else {
+                    if ((phone.length() != 10) || (!phone.substring(0, 2).equals("05")) || Pattern.matches("[a-zA-Z]+", phone) == true)
                                                 eTphone.setError("invalid phone number");
-           }
-            else
-            {
+           }}}
+
 
 
 
@@ -341,4 +370,4 @@ public class auth extends AppCompatActivity {
                         }
                     });
         }
-    }}}
+    }}

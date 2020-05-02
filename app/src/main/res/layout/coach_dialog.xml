@@ -4,16 +4,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="30dp">
-
-
     <TextView
         android:id="@+id/part1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:textColor="#43A047"
+        android:textColor="#303F9F"
 
         android:textSize="15dp" />
+
+
 
 
     <TextView
@@ -23,7 +23,7 @@
         android:layout_weight="1"
 
 
-        android:textColor="#7CB342"
+        android:textColor="#1976D2"
         android:textSize="15dp" />
 
 

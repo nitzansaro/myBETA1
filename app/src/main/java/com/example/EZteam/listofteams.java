@@ -31,8 +31,10 @@ public class listofteams extends AppCompatActivity implements AdapterView.OnItem
     Button b; Spinner sp;
     ArrayList<String> pList = new ArrayList<>(),tList = new ArrayList<>(),Pylist = new ArrayList<>();
     String co,str;
-    AlertDialog.Builder ad;
+    AlertDialog.Builder ad_lift1;
     LinearLayout dialog;
+    TextView tv2,tv1;
+    String p2,p1;
 
     /**
      * intent with name
@@ -109,28 +111,24 @@ public class listofteams extends AppCompatActivity implements AdapterView.OnItem
      */
 
     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-        final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
-        final View customLayout = getLayoutInflater().inflate(R.layout.dialogx, null);
-        builder.setView(customLayout);
-        TextView tv1 = customLayout.findViewById(R.id.tv);
-        TextView tv2 = customLayout.findViewById(R.id.tv2);
+         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+         View customLayout1 = getLayoutInflater().inflate(R.layout.coach_dialog, null);
+        builder.setView(customLayout1);
+
         str = pList.get(position);
         builder.setTitle(str);
-
+         tv1 = customLayout1.findViewById(R.id.part1);
+         tv2 = customLayout1.findViewById(R.id.part2);
         refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     User u = ds.getValue(User.class);
                     if (str.equals(u.getName())) {
-                        TextView tv=customLayout.findViewById(R.id.tv);
-                        TextView tv2=customLayout.findViewById(R.id.tv2);
-                        tv.setText("email: " +u.getEmail() + " id: " + u.getid());
+
+                       tv1.setText("email: " +u.getEmail() + " id: " + u.getid());
                         tv2.setText("phone num: " +u.getPhone() + " d.o.b: " + u.getDayofbirth());
-
-                    }
-                }
-
+                    } }
             }
 
             @Override
@@ -139,7 +137,7 @@ public class listofteams extends AppCompatActivity implements AdapterView.OnItem
             }
         });
 
-        ad.setPositiveButton("remove player", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("remove player", new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -159,17 +157,17 @@ public class listofteams extends AppCompatActivity implements AdapterView.OnItem
         });
 
 
-        ad.setCancelable(false);
+        builder.setCancelable(false);
 
 
-        ad.setNeutralButton("ok", new DialogInterface.OnClickListener() {
+        builder.setNeutralButton("ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.cancel();
             }
         });
-        AlertDialog adb = ad.create();
-        adb.show();
+        android.app.AlertDialog ad_lift = builder.create();
+        ad_lift.show();
 
 
 
