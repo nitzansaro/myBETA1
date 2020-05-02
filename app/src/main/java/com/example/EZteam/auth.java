@@ -279,15 +279,14 @@ public class auth extends AppCompatActivity {
                     (!phone.isEmpty()) && (!id.isEmpty()) ) {
                 if (((!email.endsWith(".com")) || (!email.endsWith(".il"))) && (email.indexOf("@") == (-1)))
                    eTemail.setError("invalid e-mail");
-                else
                           if (birthday.isEmpty()) tVb.setError("you must enter your birth day");
-                          else
                                   if (Pattern.matches("[a-zA-Z]+", id) == true || id.length() != 9)
                                         eTid.setError("invalid id");
-                                  else
                                       if ((phone.length() != 10) || (!phone.substring(0, 2).equals("05")) || Pattern.matches("[a-zA-Z]+", phone) == true)
                                                 eTphone.setError("invalid phone number");
            }
+            else
+            {
 
 
 
@@ -342,4 +341,4 @@ public class auth extends AppCompatActivity {
                         }
                     });
         }
-    }}
+    }}}

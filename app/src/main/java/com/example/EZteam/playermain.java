@@ -353,6 +353,12 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
         return true;
     }
 
+    /**
+     * this closes app and run brodcast in background.
+     * setting info about list and sending to brodcst g.
+     * @param view
+     */
+
 
     public void noti(View view) {
         if (!gList.isEmpty())
@@ -362,6 +368,7 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
 
             SharedPreferences settings=getSharedPreferences("PREFS_NAME",MODE_PRIVATE);
             SharedPreferences.Editor editor=settings.edit();
+            editor.putString("firstgame",gList.get(0));
             editor.putString("gamesoon",s);
             editor.commit();
              moveTaskToBack(true);}
