@@ -81,10 +81,9 @@ public class MyTeam extends AppCompatActivity implements AdapterView.OnItemClick
 
     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
-        final View customLayout = getLayoutInflater().inflate(R.layout.dialogx, null);
+        final View customLayout = getLayoutInflater().inflate(R.layout.dialog_player, null);
         builder.setView(customLayout);
-        TextView tv1 = customLayout.findViewById(R.id.tv);
-        TextView tv2 = customLayout.findViewById(R.id.tv2);
+
         str = pList.get(position);
         builder.setTitle(str);
         refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -93,9 +92,9 @@ public class MyTeam extends AppCompatActivity implements AdapterView.OnItemClick
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     User u = ds.getValue(User.class);
                     if (str.equals(u.getName())) {
-                        TextView tv=customLayout.findViewById(R.id.tv);
-                        TextView tv2=customLayout.findViewById(R.id.tv2);
-                        tv.setText("email: " +u.getEmail() + " id: " + u.getid());
+                        TextView tv1 = customLayout.findViewById(R.id.game1);
+                        TextView tv2 = customLayout.findViewById(R.id.game2);
+                        tv1.setText("email: " +u.getEmail() + " id: " + u.getid());
                         tv2.setText("phone num: " +u.getPhone() + " d.o.b: " + u.getDayofbirth());
                     } } }
 

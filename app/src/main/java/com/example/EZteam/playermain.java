@@ -250,16 +250,17 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
              */
 
             case R.id.lv:
-                //final android.app.AlertDialog.Builder builder2 = new android.app.AlertDialog.Builder(this);
+                final android.app.AlertDialog.Builder builder2 = new android.app.AlertDialog.Builder(this);
+                final View customLayout2 = getLayoutInflater().inflate(R.layout.dialog_player, null);
+                builder2.setView(customLayout2);
 
 
-                //final View customLayout2 = getLayoutInflater().inflate(R.layout.dialogx, null);
-                /*dialog = (LinearLayout) getLayoutInflater().inflate(R.layout.dialogx, null);
-                add = new AlertDialog.Builder(this);
-                add.setView(dialog);
 
 
-                ad = new AlertDialog.Builder(this);*/
+
+
+
+                ad = new AlertDialog.Builder(this);
                 final String str = gList.get(position);
                 refGame.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -268,14 +269,26 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
                             Game gg = data.getValue(Game.class);
                             if (gg.getTeamName2().equals(str)) {
                                 Toast.makeText(playermain.this, gg.getCategory() + "      at " + gg.getTime() + " " + gg.getDate() + " at " + gg.getPlace(), Toast.LENGTH_LONG).show();
-                               // add.setTitle("A " + gg.getCategory() + " game versus " + gg.getTeamName2());
-                                //add.setMessage();
+                                TextView game1 = customLayout2.findViewById(R.id.game1);
+                                TextView game2 = customLayout2.findViewById(R.id.game2);
 
+
+                                game1.setText("A " + gg.getCategory() + " game versus " + gg.getTeamName2());
+                                game2.setText(   gg.getTime() + " " + gg.getDate() + " at " + gg.getPlace());
+                                android.app.AlertDialog adb = builder2.create();
+                                adb.show();
                             }
 
+                            builder2.setNeutralButton("ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterfac, int i) {
+                                    dialogInterfac.cancel();
+                                }
+                            });
+
+
                         }
-                        //game1.setText();
-                        //game2.setText();
+
                     }
 
                     @Override
