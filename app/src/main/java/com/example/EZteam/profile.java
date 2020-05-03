@@ -69,19 +69,5 @@ public class profile extends AppCompatActivity {
 
 
 
-    public void update(View view) {
 
-        FirebaseUser user = refAuth.getCurrentUser();
-        if (!cBconnectview.isChecked()){
-            refAuth.signOut();
-        }
-        SharedPreferences settings=getSharedPreferences("PREFS_NAME1",MODE_PRIVATE);
-        SharedPreferences.Editor editor=settings.edit();
-        editor.putBoolean("stayConnect",cBconnectview.isChecked());
-        editor.apply(); //changed from commit
-       finish();
-
-
-
-    }
 }

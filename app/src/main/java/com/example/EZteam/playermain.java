@@ -89,7 +89,7 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
         super.onStart();
         FirebaseUser user = refAuth.getCurrentUser();
         uid = user.getUid();
-        Query query = refUsers.child("Player")
+        Query query = refUsers
                 .orderByChild("uid")
                 .equalTo(uid)
                 .limitToFirst(1);
@@ -157,10 +157,7 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
                                             if (m.getPLayer_msg().equals(tname))
                                                 mList.add(m.getMsg());
 
-
-
-
-                                        }
+                 }
                                         ArrayAdapter adp = new ArrayAdapter<String>(playermain.this,R.layout.support_simple_spinner_dropdown_item, mList);
                                         lvmsg.setAdapter(adp);
                                     }
@@ -183,9 +180,6 @@ public class playermain extends AppCompatActivity implements AdapterView.OnItemC
                                             Game g = data.getValue(Game.class);
                                             if (g.getTeamName().equals(tname))
                                                 gList.add(g.getTeamName2());
-
-
-
 
                                         }
                                         ArrayAdapter adp = new ArrayAdapter<String>(playermain.this, R.layout.support_simple_spinner_dropdown_item, gList);

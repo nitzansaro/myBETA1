@@ -137,7 +137,7 @@ public class listofteams extends AppCompatActivity implements AdapterView.OnItem
             }
         });
 
-        builder.setPositiveButton("remove player", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("remove player", new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -159,8 +159,29 @@ public class listofteams extends AppCompatActivity implements AdapterView.OnItem
 
         builder.setCancelable(false);
 
+        builder.setPositiveButton("Show profile", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                            User u = ds.getValue(User.class);
+                            if (str.equals(u.getName())) {
 
-        builder.setNeutralButton("ok", new DialogInterface.OnClickListener() {
+                                tv1.setText("email: " +u.getEmail() + " id: " + u.getid());
+                                tv2.setText("phone num: " +u.getPhone() + " d.o.b: " + u.getDayofbirth());
+                            } }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
+        builder.setNeutralButton("cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.cancel();

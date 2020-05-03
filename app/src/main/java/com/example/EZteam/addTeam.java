@@ -76,16 +76,18 @@ public class addTeam extends AppCompatActivity {
         query.addListenerForSingleValueEvent(VEL);
 
         if (!teamEX) {
+            if (!Ncoach.equals("")){
             playlist.add(Ncoach);
             Team t = new Team(tnum, tname, Ncoach, playlist);
             refTeams.child(tname).setValue(t);
             Toast.makeText(addTeam.this, "Team added successfully", Toast.LENGTH_LONG).show();
             Intent si = new Intent(addTeam.this, Coachmain.class);
-            startActivity(si); }
-        else
+            startActivity(si);}
+        } else {
             nameText.setError("Team already exist");
-            Toast.makeText(addTeam.this, "Try other option", Toast.LENGTH_LONG).show(); }
+            Toast.makeText(addTeam.this, "Try other option", Toast.LENGTH_LONG).show();
+        }
 
-
+    }
 
 }

@@ -151,13 +151,6 @@
             android:textColorHighlight="#FFFFFF"
             android:textColorLink="#FFFFFF" />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFD740"
-            android:onClick="update"
-            android:text="update" />
 
 
     </LinearLayout>

@@ -59,7 +59,7 @@ public class auth extends AppCompatActivity {
     CheckBox cBstayconnect;
     Button btn;
     Switch pOrc;
-    Boolean coach;
+    Boolean coach,bool;
     Boolean c=true;
 
     String name, phone, email, password, uid,id,birthday;
@@ -83,10 +83,16 @@ public class auth extends AppCompatActivity {
 
         tVregister=(TextView) findViewById(R.id.tVregister);
         btn=(Button)findViewById(R.id.btn);
-
+        pOrc.setVisibility(View.VISIBLE);
+        tVcoach4.setVisibility(View.VISIBLE);
         stayConnect=false;
         registered=true;
         Coach1=false;
+        SharedPreferences settings=getSharedPreferences("PREFS_NAME",MODE_PRIVATE);
+        Boolean isChecked=settings.getBoolean("coach",false);
+        if (isChecked)
+            pOrc.setChecked(true);
+
         /**
          * dialog day of birth, the user should enter his correct date.
 
@@ -129,8 +135,8 @@ public class auth extends AppCompatActivity {
 
          */
 
-        SharedPreferences settings=getSharedPreferences("PREFS_NAME",MODE_PRIVATE);
-        firstrun=settings.getBoolean("firstRun",false);
+        SharedPreferences settings1=getSharedPreferences("PREFS_NAME",MODE_PRIVATE);
+        firstrun=settings1.getBoolean("firstRun",false);
 
         if (firstrun) {
             tVtitle.setText("Register");
@@ -185,6 +191,7 @@ public class auth extends AppCompatActivity {
                 eTemail.setVisibility(View.VISIBLE);
 
 
+
                 btn.setText("Register");
                 registered=false;
                 logoption();
@@ -209,12 +216,15 @@ public class auth extends AppCompatActivity {
                 eTname.setVisibility(View.INVISIBLE);
                 eTphone.setVisibility(View.INVISIBLE);
                 eTid.setVisibility(View.INVISIBLE);
-                pOrc.setVisibility(View.INVISIBLE);
-                tVcoach4.setVisibility(View.INVISIBLE);
+                pOrc.setVisibility(View.VISIBLE);
+                tVcoach4.setVisibility(View.VISIBLE);
                 tVb.setVisibility(View.INVISIBLE);
                 eTpass.setVisibility(View.VISIBLE);
                 eTemail.setVisibility(View.VISIBLE);
-
+                SharedPreferences settings=getSharedPreferences("PREFS_NAME",MODE_PRIVATE);
+                Boolean isChecked=settings.getBoolean("coach",false);
+                if (isChecked)
+                    pOrc.setChecked(true);
 
                 btn.setText("Login");
                 registered=true;
@@ -247,37 +257,24 @@ public class auth extends AppCompatActivity {
                                 SharedPreferences settings = getSharedPreferences("PREFS_NAME", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = settings.edit();
                                 editor.putBoolean("stayConnect", cBstayconnect.isChecked());
+                                editor.putBoolean("coach",pOrc.isChecked());
                                 editor.apply(); //changed from commit
                                 Log.d("Main2Activity", "signinUserWithEmail:success");
                                 Toast.makeText(auth.this, "Login Success", Toast.LENGTH_LONG).show();
+                                Boolean isCoach=settings.getBoolean("coach",false);
+                                if (isCoach) {
 
-                                refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                                            User u = ds.getValue(User.class);
-                                            if (email.equals(u.getEmail())) {
+                                    Intent si = new Intent(auth.this, Coachmain.class);
 
-                                                if (u.getCoach()) {
-                                                    Intent si = new Intent(auth.this, Coachmain.class);
-                                                    si.putExtra("name", name);
-                                                    startActivity(si);
-                                                } else {
+                                    si.putExtra("name",name);
+                                    startActivity(si);
+                                } else {
 
-                                                    Intent si = new Intent(auth.this, playermain.class);
-                                                    si.putExtra("name", name);
-                                                    startActivity(si);
-                                                }}}
-                                            }
+                                    Intent si = new Intent(auth.this, playermain.class);
+                                    si.putExtra("name",name);
+                                    startActivity(si);
 
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                    }
-                                });
-
-
+                                }
                             } else {
                                 Log.d("Main2Activity", "signinUserWithEmail:fail");
                                 Toast.makeText(auth.this, "e-mail or password are wrong!", Toast.LENGTH_LONG).show();
@@ -312,7 +309,7 @@ public class auth extends AppCompatActivity {
 
 
 
-
+            if (eTemail.getError() == null &&eTid.getError() == null &&eTname.getError() == null &&eTpass.getError() == null &&eTphone.getError() == null){
 
             final ProgressDialog pd = ProgressDialog.show(this, "Register", "Registering...", true);
             refAuth.createUserWithEmailAndPassword(email, password)
@@ -361,5 +358,9 @@ public class auth extends AppCompatActivity {
                             }
                         }
                     });
+            }
+            else
+                Toast.makeText(auth.this, "clear errors to continue", Toast.LENGTH_LONG).show();
+
         }
     }}

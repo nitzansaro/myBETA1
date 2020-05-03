@@ -74,7 +74,7 @@ public class Coachmain extends AppCompatActivity implements AdapterView.OnItemCl
         super.onStart();
         FirebaseUser user = refAuth.getCurrentUser();
         uid = user.getUid();
-        Query query = refUsers.child("Coach")
+        Query query = refUsers
                 .orderByChild("uid")
                 .equalTo(uid)
                 .limitToFirst(1);
